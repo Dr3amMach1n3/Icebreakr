@@ -1,0 +1,57 @@
+body
+{
+	text-align: center;
+}
+
+header
+{
+	font-size: 30px;
+	font-weight: bold;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding-left: 41.75%;
+  padding-right: -41.75%;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+
+li a:hover {
+  background-color: #111;
+}
+
+nav
+{
+	display: block;
+	text-align: center;
+}
+
+img
+{
+	width: 150px;
+	height: auto;
+}
+
+.bodytitles
+{
+	margin: 1%;
+	font-size: 20px;
+	font-weight: bold;
+}	
+
+
+
