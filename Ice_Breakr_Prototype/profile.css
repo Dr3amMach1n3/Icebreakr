@@ -19,3 +19,7 @@
 .spacer {
     background-color: #EEE;
 }
+
+img {
+	max-width:40%;
+}
