@@ -1,12 +1,25 @@
 .d-flex {
-  background-color: #CFE2F3;
+    background-color: #CFE2F3;
 }
 
 .my-0 {
-  color: #674EA7;
-  font-weight: bolder;
+    color: #674EA7;
+    font-weight: bolder;
 }
 
 .container {
-  text-align: center;
+    background-color: #B82E8A;
+}
+
+.spacer, .spacer_picture{
+    margin: 6px;
+    width: 100%;
+}
+
+.spacer {
+    background-color: #EEE;
+}
+
+.form-control {
+    width: 2px;
 }
