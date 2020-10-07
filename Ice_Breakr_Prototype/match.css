@@ -11,15 +11,12 @@
     background-color: #B82E8A;
 }
 
-.spacer, .spacer_picture{
+.spacer {
     margin: 6px;
     width: 100%;
-}
-
-.spacer {
     background-color: #EEE;
 }
 
-img {
-	max-width:40%;
+.spacer_large {
+    margin: 20px;
 }
