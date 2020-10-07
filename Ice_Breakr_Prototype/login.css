@@ -11,6 +11,10 @@
     background-color: #B82E8A;
 }
 
+.secondary {
+	background-color: #2266ee;
+}
+
 .spacer, .spacer_picture{
     margin: 6px;
     width: 100%;
