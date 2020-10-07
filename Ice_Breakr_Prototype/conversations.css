@@ -11,6 +11,14 @@
     background-color: #B82E8A;
 }
 
+.primary {
+	background-color: #674EEE;
+}
+
+.secondary {
+	background-color: #EEE;
+}
+
 .spacer, .spacer_picture{
     margin: 6px;
     width: 100%;
@@ -20,6 +28,10 @@
     background-color: #EEE;
 }
 
-img {
-	max-width:40%;
+.msgr {
+	display: flex;
+}
+
+.btn {
+	text-align: center;
 }
