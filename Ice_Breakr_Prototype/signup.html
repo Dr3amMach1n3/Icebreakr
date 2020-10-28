@@ -27,9 +27,6 @@
                 <div class="row">
                     <div class="spacer align-items-center pb-1">Name: <input id="usr" type="text"/></div>
                 </div>
-                <div class="row">
-                    <div class="spacer align-items-center pb-1">Name: <input id="usr" type="text"/></div>
-                </div>
                 <div class="row spacer">
                     <div class="col">
                         Birthday: 
@@ -47,7 +44,11 @@
                 <div class="row">
                     <div class="col">
                         <div class="spacer">Gender: <select id="gender">
-                            <option value = "lol">Aries</option>
+		                        <option value="Male">Male</option>
+		                        <option value="Female">Female</option>
+		                        <option value="Transgender">Transgender</option>
+		                        <option value="Transexual">Transexual</option>
+		                        <option value="Non-Binary">Non-Binary</option>
                         </select></div>
                     </div>
                     <div class="col">
@@ -71,10 +72,11 @@
                     <textarea id="conversation_starters" class="form-control" rows="8">Is there funk after death?</textarea>
                     </div>
                 </div>
+                <div class="row">
+                    <a class="btn btn-light mt-2 mb-4 text-center" href="profile.html">Register</a>
+                </div>
             </div>
-            <div class="col-sm-3"></div>
         </div>
     </div>
-    <a class="btn btn-light mt-2 mb-4 text-center" href="profile.html">Login</a>
 </body>
 </html>
