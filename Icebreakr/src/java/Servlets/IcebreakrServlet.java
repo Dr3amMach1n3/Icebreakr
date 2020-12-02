@@ -246,6 +246,61 @@ public class IcebreakrServlet extends HttpServlet {
                 username = swipeQueue.nextUser(username, dbConnection);
                 loadUser(otherUser, username, dbConnection);
                 url = "match.jsp";
+            }else if(action.equals("conversation")){
+                Statement statement = dbConnection.createStatement();
+                ResultSet resultA = statement.executeQuery("SELECT userB FROM Swipe WHERE userA='" + currentUser.getUsername() + "' AND decisionA='1' AND decisionB='1'");
+                ResultSet resultB = statement.executeQuery("SELECT userA FROM Swipe WHERE userB='" + currentUser.getUsername() + "' AND decisionA='1' AND decisionB='1'");
+                
+                Conversations conversations = new Conversations();
+                
+                while(resultA.next()) {
+                    conversations.addUsers(resultA.getString("userB"));
+                }
+                while(resultB.next()) {
+                    conversations.addUsers(resultB.getString("userB"));
+                }
+                conversations.addUsers((ArrayList<String>) resultA);
+                conversations.addUsers((ArrayList<String>) resultB);
+                conversations.sort();
+               
+                session.setAttribute("conversations", conversations);
+                
+                url = "/conversations.jsp";
+                statement.close();
+                resultA.close();
+                resultB.close();
+            }else if(action.equals("messages")){
+                String other = request.getParameter("target");
+                
+                Statement statement = dbConnection.createStatement();
+                ResultSet result = statement.executeQuery("SELECT * FROM Message WHERE (sender='" + currentUser.getUsername() + "' AND receiver='" + other
+                        + "') OR (receiver='" + currentUser.getUsername()
+                        + "' AND sender='" + other + "') ORDER BY time DESC");
+                
+                Messages messages = new Messages();
+                
+                messages.addTarget(other);
+                while(result.next()) {
+                    messages.addSender(result.getString("sender"));
+                    messages.addReceiver(result.getString("receiver"));
+                    messages.addContent(result.getString("content"));
+                }
+                
+                session.setAttribute("messages", messages);
+                
+                url = "/conversations.jsp";
+                statement.close();
+                result.close();
+            }else if(action.equals("sendMessage")){
+                String text = request.getParameter("text");
+                String target = request.getParameter("target");
+                
+                Statement statement = dbConnection.createStatement();
+                
+                statement.executeQuery("INSERT INTO Message (receiver, sender, content) VALUES (" + target + ", " + currentUser.getUsername() + ", " + text + ")");
+                
+                url = "/conversations.jsp";
+                statement.close();
             }
             dbConnection.close();
             /*RequestDispatcher*/ dispatcher = request.getRequestDispatcher(url);
