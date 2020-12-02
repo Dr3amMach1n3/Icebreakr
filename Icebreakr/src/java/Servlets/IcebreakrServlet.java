@@ -332,7 +332,6 @@ public class IcebreakrServlet extends HttpServlet {
                     url = "profile.jsp";
                 }
                 
-                url = "index.jsp";
                 statement.close();
                 result.close();
             }else if(action.equals("register")){
