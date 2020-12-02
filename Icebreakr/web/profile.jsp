@@ -26,9 +26,12 @@
                 <div class="row">
                     <div class="col">
                         <div class="spacer">
-                            Name: <form action="" method="post">
-                                <input type=text id="name" value="${user.name}">
-                            </form>
+                            Name: <span>
+                                <form action="IcebreakrServlet" method="post">
+                                    <input type="hidden" name="action" value="profile">
+                                    <input type=text name="name" id="name" value="${profile.user.name}">
+                                </form>  
+                            </span>
                         </div>
                     </div>
                     <div class="col">
