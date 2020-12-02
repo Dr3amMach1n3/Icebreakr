@@ -8,6 +8,7 @@ package beans;
 import java.beans.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 /**
  *
  * @author Pierce
@@ -16,16 +17,20 @@ public class User implements Serializable{
     public enum Hobbies {Yoga, Musician, Singing, Dancing, Art, Hiking, Biking,
     Swimming, Cooking, Gardening, Driving, Comedy, Fighting, Philosophy, Buisness, Investing}
     public enum Genders {Male, Female, Transgender, Transsexual, Non_Binary}
+    public enum HairColors {Brown, Bald, Blonde, Dirty_Blonde, Black, Auburn, Ginger,
+    Gray, White, Silver, Red, Orange, Yellow, Green, Blue, Multi_Colored}
     private String username;
     private String password;
     private String name;
+    private Date birthday;
     private String gender;
+    private ArrayList<Genders> lookingfor;
     private String location;
     private ArrayList<Hobbies> hobbies;
     private String starters;
     private int heightFeet;
     private int heightInches;
-    private String hairColor;
+    private HairColors hairColor;
     private String zodiac;
     private int children;
     private int weight;
@@ -44,9 +49,17 @@ public class User implements Serializable{
     public void setName(String name) {
         this.name = name;
     }
+    
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
 
     public void setGender(String gender) {
         this.gender = gender;
+    }
+    
+    public void setLookingfor(ArrayList<Genders> lookingfor) {
+        this.lookingfor = lookingfor;
     }
 
     public void setLocation(String location) {
@@ -69,7 +82,7 @@ public class User implements Serializable{
         this.heightInches = heightInches;
     }
 
-    public void setHairColor(String hairColor) {
+    public void setHairColor(HairColors hairColor) {
         this.hairColor = hairColor;
     }
 
@@ -108,9 +121,17 @@ public class User implements Serializable{
     public String getName() {
         return name;
     }
+    
+    public Date getBirthday() {
+        return birthday;
+    }
 
     public String getGender() {
         return gender;
+    }
+    
+    public ArrayList<Genders> getLookingfor() {
+        return lookingfor;
     }
 
     public String getLocation() {
@@ -133,7 +154,7 @@ public class User implements Serializable{
         return heightInches;
     }
 
-    public String getHairColor() {
+    public HairColors getHairColor() {
         return hairColor;
     }
 
