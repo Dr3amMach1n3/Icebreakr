@@ -471,6 +471,30 @@ public class IcebreakrServlet extends HttpServlet {
                 
                 url = "/conversations.jsp";
                 statement.close();
+            }else if(action.equals("pictures")){
+                Statement statement = dbConnection.createStatement();
+                ResultSet result = statement.executeQuery("SELECT * FROM Photo WHERE username='" + currentUser.getUsername() + "' ORDER BY position ASC");
+                
+                Pictures pictures = new Pictures();
+                pictures.pad();
+                
+                while(result.next()) {
+                    String source = result.getString("source");
+                    int pos = Integer.parseInt(request.getParameter("position"));
+                    pictures.addPicture(pos,source);
+                }
+                try {
+                    String new_url = request.getParameter("url");
+                    int pos = Integer.parseInt(request.getParameter("pos"));
+                    pictures.addPicture(pos,new_url);
+                    statement.executeQuery("DELETE FROM Picture WHERE username='" + currentUser.getUsername() + "' AND position='" + String.valueOf(pos) + "'");
+                    statement.executeQuery("INSERT INTO Picture (username, source, position) VALUES (" + currentUser.getUsername() + ", " + new_url + ", " + String.valueOf(pos));
+                } catch(Exception e) { }
+                
+                session.setAttribute("pictures", pictures);
+                url = "pictures.jsp";
+                statement.close();
+                result.close();
             }
             dbConnection.close();
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);
