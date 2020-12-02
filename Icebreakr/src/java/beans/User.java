@@ -8,6 +8,7 @@ package beans;
 import java.beans.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 /**
  *
@@ -182,4 +183,31 @@ public class User implements Serializable{
         return glasses;
     }
     
+    public int generateAge() {
+        long time = birthday.getTime();
+        Calendar now = Calendar.getInstance();
+        Calendar bday = Calendar.getInstance();
+        bday.setTimeInMillis(time);
+        int age = now.get(now.YEAR) - bday.get(bday.YEAR);
+        if(now.get(now.DAY_OF_YEAR) < bday.get(bday.DAY_OF_YEAR)) {
+            age = age - 1;
+        }
+        return age;
+    }
+    
+    public String toString(Genders gender) {
+        if(gender == Genders.Non_Binary) {
+            return "Non Binary";
+        } else {
+            return gender.name();
+        }
+    }
+    
+    public String toString(HairColors hairColor) {
+        if(hairColor == HairColors.Multi_Colored) {
+            return "Multi-Colored";
+        } else {
+            return hairColor.name();
+        }
+    }
 }
