@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -279,15 +280,12 @@ public class IcebreakrServlet extends HttpServlet {
             Class.forName(driver);
             String action = request.getParameter("action");
             
-            String dbURL = "jdbc:mariadb://localhost:3306/apollo9_pierceresume";
+            String dbURL = "jdbc:mariadb://localhost:3306/apollo9_icebreakr";
             String dbUsername = "apollo9";
             String dbPassword = "DreamTeam69(nice)";
             String url = "index.jsp";
             Connection dbConnection = DriverManager.getConnection(dbURL, dbUsername, dbPassword);
-            
-            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-            dispatcher.forward(request, response);
-            
+          
             String genderPrefix = "g";
             String hobbyPrefix = "h";
             int numGenders = 5;
@@ -323,9 +321,11 @@ public class IcebreakrServlet extends HttpServlet {
                 
                 if(!notEmpty){
                     credErr.setNameErr(true);
+                    response.setHeader("errMsg", "username");
                     url = "index.jsp";
                 }else if(!password.equals(result.getString("password"))){
                     credErr.setPassErr(true);
+                    response.setHeader("errMsg", "pass");
                     url = "index.jsp";
                 }else{
                     loadUser(currentUser, username, dbConnection);
@@ -352,8 +352,9 @@ public class IcebreakrServlet extends HttpServlet {
                     String location = request.getParameter("location");
                     String hobbies = getBitString(request, numHobbies, hobbyPrefix);
                     String starters = request.getParameter("starters");
+                    
                     result = statement.executeQuery("INSERT INTO User (username, password, name, birthday, gender, lookingfor, location, hobbies, starters) "
-                            + "VALUES (" + username + ", " + password + "," + name + "," + birthday + "," + gender + "," + lookingfor + "," + location + "," + hobbies + "," + starters);
+                            + "VALUES ('" + username + "', '" + password + "', '" + name + "', '" + birthday + "', '" + gender + "', '" + lookingfor + "', '" + location + "', '" + hobbies + "', '" + starters + "')");
                     loadUser(currentUser, username, dbConnection);
                     url = "profile.jsp";
                 }else{
@@ -472,12 +473,14 @@ public class IcebreakrServlet extends HttpServlet {
                 statement.close();
             }
             dbConnection.close();
-            /*RequestDispatcher*/ dispatcher = request.getRequestDispatcher(url);
+            RequestDispatcher dispatcher = request.getRequestDispatcher(url);
             dispatcher.forward(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(IcebreakrServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(IcebreakrServlet.class.getName()).log(Level.SEVERE, null, ex);
+            response.setHeader("errMsg", ex.toString());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+            dispatcher.forward(request, response);
         }
     }
 
