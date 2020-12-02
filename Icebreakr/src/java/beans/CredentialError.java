@@ -14,6 +14,11 @@ import java.io.Serializable;
 public class CredentialError implements Serializable{
     private boolean nameErr;
     private boolean passErr;
+    
+    public CredentialError() {
+        nameErr = false;
+        passErr = false;
+    }
 
     public void setNameErr(boolean nameErr) {
         this.nameErr = nameErr;

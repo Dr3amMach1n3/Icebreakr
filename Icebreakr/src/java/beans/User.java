@@ -13,13 +13,14 @@ import java.util.ArrayList;
  * @author Pierce
  */
 public class User implements Serializable{
+    public enum Hobbies {Yoga, Musician, Singing, Dancing, Art, Hiking, Biking,
+    Swimming, Cooking, Gardening, Driving, Comedy, Fighting, Philosophy, Buisness, Investing}
+    public enum Genders {Male, Female, Transgender, Transsexual, Non_Binary}
     private String username;
     private String password;
     private String name;
     private String gender;
     private String location;
-    public enum Hobbies {Yoga, Musician, Singing, Dancing, Art, Hiking, Biking,
-    Swimming, Cooking, Gardening, Driving, Comedy, Fighting, Philosophy, Buisness, Investing}
     private ArrayList<Hobbies> hobbies;
     private String starters;
     private int heightFeet;

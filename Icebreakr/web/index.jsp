@@ -23,12 +23,13 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-6 main px-3 mb-5 pt-3 pb-4">
                 <form action="IcebreakrServlet" method="post">
+                    <input type="hidden" name="action" value="login">
                     <div class="row pt-2">
                         <div class="col-sm-2"></div>
                         <div class="col-sm-8">
                             <div class="spacer align-items-center pb-1">Username:
                                     <br>
-                                    <input id="usr" type="text"/>
+                                    <input name="username" type="text"/>
                             </div>
                         </div>
                         <div class="col-sm-2"></div>
@@ -38,26 +39,28 @@
                         <div class="col-sm-8">
                             <div class="spacer align-items-center pb-1">Password:
                                 <br>
-                                <input id="usr" type="text"/>
+                                <input name="password" type="text"/>
                             </div>
                         </div>
                         <div class="col-sm-2"></div>
                     </div>
+                    <div class="row">
+                            <div class="col text-center">
+                                <input type="submit" value="Login">
+                            </div>
+                    </div>
                 </form>
-                <div class="row">
-                	<div class="col text-center">
-                		<a class="btn btn-light mt-2" href="profile.html">Login</a>
-                	</div>
-                </div>
             </div>
             <div class="col-sm-3"></div>
         </div>
     </div>
     <div class="container">
     	<div class="row">
-    		<div class="col text-center">
-    			New user? <a href="signup.html"><u>Register new account!</u></a>
-    		</div>
+            <div class="col text-center">
+                <div class="col text-center">
+                        New user? <a href="signup.jsp"><u>Register new account!</u></a>
+                </div>
+            </div>
     	</div>
     </div>
     <br>
@@ -66,9 +69,10 @@
     	<div class="row">
     		<div class="col-sm-4"></div>
     		<div class="col-sm-4 text-center">
-    			<a class="btn container secondary pt-1 pb-1" href="other_profile.html">
-    				Newest Member!
-    			</a>
+                        <form action="IcebreakrServlet" method="post">
+                            <input type="hidden" name="action" value="preview">
+                            <input type="submit" value="Preview Member!">
+                        </form>
     		</div>
     		<div class="col-sm-4"></div>
     	</div>

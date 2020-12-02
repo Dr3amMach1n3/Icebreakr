@@ -5,11 +5,12 @@
  */
 package Servlets;
 
-import beans.*;
+import beans.CredentialError;
+import beans.SwipeQueue;
+import beans.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -108,12 +109,15 @@ public class IcebreakrServlet extends HttpServlet {
             String driver = "org.mariadb.jdbc.Driver";
             Class.forName(driver);
             String action = request.getParameter("action");
-        
-            String dbURL = "jdbc:mariadb://localhost:3306/apollo9_Icebreakr";
+            
+            String dbURL = "jdbc:mariadb://localhost:3306/apollo9_pierceresume";
             String dbUsername = "apollo9";
             String dbPassword = "DreamTeam69(nice)";
             String url = "index.jsp";
             Connection dbConnection = DriverManager.getConnection(dbURL, dbUsername, dbPassword);
+            
+            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+            dispatcher.forward(request, response);
             
             String genderPrefix = "g";
             String hobbyPrefix = "h";
@@ -143,7 +147,7 @@ public class IcebreakrServlet extends HttpServlet {
             if (action.equals("login")){
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
-
+                
                 Statement statement = dbConnection.createStatement();
                 ResultSet result = statement.executeQuery("SELECT password FROM User WHERE username='" + username + "'");
                 boolean notEmpty = result.next();
@@ -158,6 +162,8 @@ public class IcebreakrServlet extends HttpServlet {
                     loadUser(currentUser, username, dbConnection);
                     url = "profile.jsp";
                 }
+                
+                url = "index.jsp";
                 statement.close();
                 result.close();
             }else if(action.equals("register")){
@@ -193,8 +199,10 @@ public class IcebreakrServlet extends HttpServlet {
                 statement.close();
                 result.close();
             }else if(action.equals("logout")){
-                credErr.setNameErr(false);
-                credErr.setPassErr(false);
+                session.setAttribute("credErr", null);
+                session.setAttribute("currentUser", null);
+                session.setAttribute("otherUser", null);
+                session.setAttribute("swipeQueue", null);
                 url = "index.jsp";
             }else if(action.equals("preview_user")){
                 Statement statement = dbConnection.createStatement();
@@ -207,82 +215,40 @@ public class IcebreakrServlet extends HttpServlet {
                 result.close();
                 statement.close();
             }else if(action.equals("match")){
-                String username = swipeQueue.first();
-                loadUser(otherUser, username, dbConnection);
+                String username = currentUser.getUsername();
+                SwipeQueue swipeQueue = (SwipeQueue) session.getAttribute("swipeQueue");
+                if(swipeQueue == null){
+                    swipeQueue = new SwipeQueue();
+                    session.setAttribute("swipeQueue", swipeQueue);
+                }
+                String nextUser = swipeQueue.nextUser(username, dbConnection);
+                loadUser(otherUser, nextUser, dbConnection);
                 url = "match.jsp";
             }else if(action.equals("swipe")){
-                String username = swipeQueue.first();
-                swipeQueue.remove(username);
+                String username = currentUser.getUsername();
+                String swipe = request.getParameter("swipe");
+                SwipeQueue swipeQueue = (SwipeQueue) session.getAttribute("swipeQueue");
+                if(swipeQueue == null){
+                    swipeQueue = new SwipeQueue();
+                    session.setAttribute("swipeQueue", swipeQueue);
+                }
+                String nextUser = swipeQueue.nextUser(username, dbConnection);
+                swipeQueue.removeNext();
                 
                 Statement statement = dbConnection.createStatement();
-                ResultSet result = statement.executeQuery("UPDATE decisionA FROM Swipe WHERE userA='" + currentUser.getUsername() + "' AND userB='" + username + "'");
+                ResultSet result = statement.executeQuery("UPDATE Swipe SET decisionA='" + request.getParameter("swipe") + " WHERE userA='" + username + "' AND userB='" + nextUser + "'");
                 boolean notEmpty = result.next();
                 
                if(!notEmpty){
-                   result = statement.executeQuery("UPDATE decisionB FROM Swipe WHERE userB='" + currentUser.getUsername() + "' AND userA='" + username + "'");
+                   result = statement.executeQuery("UPDATE Swipe Set decisionB='" +  request.getParameter("swipe") + "WHERE userB='" + username + "' AND userA='" + nextUser + "'");
                }
                 
-                username = swipeQueue.first();
+                username = swipeQueue.nextUser(username, dbConnection);
                 loadUser(otherUser, username, dbConnection);
                 url = "match.jsp";
-            }else if(action.equals("conversation")){
-                Statement statement = dbConnection.createStatement();
-                ResultSet resultA = statement.executeQuery("SELECT userB FROM Swipe WHERE userA='" + currentUser.getUsername() + "' AND decisionA='1' AND decisionB='1'");
-                ResultSet resultB = statement.executeQuery("SELECT userA FROM Swipe WHERE userB='" + currentUser.getUsername() + "' AND decisionA='1' AND decisionB='1'");
-                
-                Conversations conversations = new Conversations();
-                
-                while(resultA.next()) {
-                    conversations.addUsers(resultA.getString("userB"));
-                }
-                while(resultB.next()) {
-                    conversations.addUsers(resultB.getString("userB"));
-                }
-                conversations.addUsers((ArrayList<String>) resultA);
-                conversations.addUsers((ArrayList<String>) resultB);
-                conversations.sort();
-               
-                session.setAttribute("conversations", conversations);
-                
-                url = "/conversations.jsp";
-                statement.close();
-                resultA.close();
-                resultB.close();
-            }else if(action.equals("messages")){
-                String other = request.getParameter("target");
-                
-                Statement statement = dbConnection.createStatement();
-                ResultSet result = statement.executeQuery("SELECT * FROM Message WHERE (sender='" + currentUser.getUsername() + "' AND receiver='" + other
-                        + "') OR (receiver='" + currentUser.getUsername()
-                        + "' AND sender='" + other + "') ORDER BY time DESC");
-                
-                Messages messages = new Messages();
-                
-                messages.addTarget(other);
-                while(result.next()) {
-                    messages.addSender(result.getString("sender"));
-                    messages.addReceiver(result.getString("receiver"));
-                    messages.addContent(result.getString("content"));
-                }
-                
-                session.setAttribute("messages", messages);
-                
-                url = "/conversations.jsp";
-                statement.close();
-                result.close();
-            }else if(action.equals("sendMessage")){
-                String text = request.getParameter("text");
-                String target = request.getParameter("target");
-                
-                Statement statement = dbConnection.createStatement();
-                
-                statement.executeQuery("INSERT INTO Message (receiver, sender, content) VALUES (" + target + ", " + currentUser.getUsername() + ", " + text + ")");
-                
-                url = "/conversations.jsp";
-                statement.close();
             }
             dbConnection.close();
-            RequestDispatcher dispatcher = request.getRequestDispatcher(url);
+            /*RequestDispatcher*/ dispatcher = request.getRequestDispatcher(url);
             dispatcher.forward(request, response);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(IcebreakrServlet.class.getName()).log(Level.SEVERE, null, ex);
