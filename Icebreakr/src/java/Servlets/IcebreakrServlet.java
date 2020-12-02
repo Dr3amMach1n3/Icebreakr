@@ -6,6 +6,9 @@
 package Servlets;
 
 import beans.*;
+import beans.User.Genders;
+import beans.User.HairColors;
+import beans.User.Hobbies;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
@@ -27,7 +30,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Pierce
+ * @author Pierce, Logan, Wesley
  */
 public class IcebreakrServlet extends HttpServlet {
     
@@ -46,8 +49,175 @@ public class IcebreakrServlet extends HttpServlet {
     private void loadUser(User user, String username, Connection connection){
         try{
             Statement statement = connection.createStatement();
-            ResultSet userInfo = statement.executeQuery("SELECT * FROM User WHERE username='" + username +"'");
+            String preparedSQL = "SELECT * FROM User WHERE username = ?";
+            PreparedStatement ps = connection.prepareStatement(preparedSQL);
+            ps.setString(1, username);
+            ResultSet results = ps.executeQuery();
+            
             //set all parameters in user to values in database
+            user.setUsername(results.getNString(1));
+            user.setPassword(results.getNString(2));
+            user.setName(results.getNString(3));
+            user.setBirthday(results.getDate(4));
+            int gender = results.getInt(5);
+            switch(gender) {
+                case 0:
+                    user.setGender("Male");
+                    break;
+                case 1:
+                    user.setGender("Female");
+                    break;
+                case 2:
+                    user.setGender("Transgender");
+                    break;
+                case 3:
+                    user.setGender("Transsexual");
+                    break;
+                default:
+                    user.setGender("Non_Binary");
+            }
+            int lookingfor = results.getInt(6);
+            ArrayList<Genders> l_lookingfor = new ArrayList<Genders>();
+            for(int i = 0; i < 5; i++) {
+                int bit = lookingfor & 1;
+                if(bit > 0) {
+                    switch(i) {
+                        case 0:
+                            l_lookingfor.add(Genders.Male);
+                            break;
+                        case 1:
+                            l_lookingfor.add(Genders.Female);
+                            break;
+                        case 2:
+                            l_lookingfor.add(Genders.Transgender);
+                            break;
+                        case 3:
+                            l_lookingfor.add(Genders.Transsexual);
+                            break;
+                        default:
+                            l_lookingfor.add(Genders.Non_Binary);
+                    }
+                }
+                lookingfor = lookingfor >> 1;
+            }
+            user.setLookingfor(l_lookingfor);
+            user.setLocation(results.getNString(7));
+            int hobbies = results.getInt(8);
+            ArrayList<Hobbies> l_hobbies = new ArrayList<Hobbies>();
+            for(int i = 0; i < 16; i++) {
+                int bit = hobbies & 1;
+                if(bit > 0) {
+                    switch(i) {
+                        case 0:
+                            l_hobbies.add(Hobbies.Yoga);
+                            break;
+                        case 1:
+                            l_hobbies.add(Hobbies.Musician);
+                            break;
+                        case 2:
+                            l_hobbies.add(Hobbies.Singing);
+                            break;
+                        case 3:
+                            l_hobbies.add(Hobbies.Dancing);
+                            break;
+                        case 4:
+                            l_hobbies.add(Hobbies.Art);
+                            break;
+                        case 5:
+                            l_hobbies.add(Hobbies.Hiking);
+                            break;
+                        case 6:
+                            l_hobbies.add(Hobbies.Biking);
+                            break;
+                        case 7:
+                            l_hobbies.add(Hobbies.Swimming);
+                            break;
+                        case 8:
+                            l_hobbies.add(Hobbies.Cooking);
+                            break;
+                        case 9:
+                            l_hobbies.add(Hobbies.Gardening);
+                            break;
+                        case 10:
+                            l_hobbies.add(Hobbies.Driving);
+                            break;
+                        case 11:
+                            l_hobbies.add(Hobbies.Comedy);
+                            break;
+                        case 12:
+                            l_hobbies.add(Hobbies.Fighting);
+                            break;
+                        case 13:
+                            l_hobbies.add(Hobbies.Philosophy);
+                            break;
+                        case 14:
+                            l_hobbies.add(Hobbies.Buisness);
+                            break;
+                        default:
+                            l_hobbies.add(Hobbies.Investing);
+                    }
+                }
+                hobbies = hobbies >> 1;
+            }
+            user.setHobbies(l_hobbies);
+            user.setStarters(results.getNString(9));
+            int height = results.getInt(10);
+            user.setHeightInches(height % 12);
+            user.setHeightFeet((height - (height % 12)) / 12);
+            int hairColor = results.getInt(11);
+            switch(hairColor) {
+                case 0:
+                    user.setHairColor(HairColors.Brown);
+                    break;
+                case 1:
+                    user.setHairColor(HairColors.Bald);
+                    break;
+                case 2:
+                    user.setHairColor(HairColors.Blonde);
+                    break;
+                case 3:
+                    user.setHairColor(HairColors.Dirty_Blonde);
+                    break;
+                case 4:
+                    user.setHairColor(HairColors.Black);
+                    break;
+                case 5:
+                    user.setHairColor(HairColors.Auburn);
+                    break;
+                case 6:
+                    user.setHairColor(HairColors.Ginger);
+                    break;
+                case 7:
+                    user.setHairColor(HairColors.Gray);
+                    break;
+                case 8:
+                    user.setHairColor(HairColors.White);
+                    break;
+                case 9:
+                    user.setHairColor(HairColors.Silver);
+                    break;
+                case 10:
+                    user.setHairColor(HairColors.Red);
+                    break;
+                case 11:
+                    user.setHairColor(HairColors.Orange);
+                    break;
+                case 12:
+                    user.setHairColor(HairColors.Yellow);
+                    break;
+                case 13:
+                    user.setHairColor(HairColors.Green);
+                    break;
+                case 14:
+                    user.setHairColor(HairColors.Blue);
+                    break;
+                default:
+                    user.setHairColor(HairColors.Multi_Colored);
+            }
+            user.setChildren(results.getInt(13));
+            user.setWeight(results.getInt(14));
+            user.setEthnicity(results.getNString(16));
+            user.setGlasses(results.getBoolean(17));
         } catch (SQLException ex) {
             Logger.getLogger(IcebreakrServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
