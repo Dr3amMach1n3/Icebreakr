@@ -214,12 +214,6 @@ public class IcebreakrServlet extends HttpServlet {
                 url = "other_profile";
                 result.close();
                 statement.close();
-            }else if(action.equals("view_user")){
-                Statement statement = dbConnection.createStatement();
-                String name = request.getParameter("target");
-                loadUser(otherUser, name, dbConnection);
-                url = "other_profile";
-                statement.close();
             }else if(action.equals("match")){
                 String username = currentUser.getUsername();
                 SwipeQueue swipeQueue = (SwipeQueue) session.getAttribute("swipeQueue");
