@@ -18,6 +18,7 @@
     <br>
     <br>
     <br>
+    <span><%=response.getHeader("errMsg")%></span>
     <div class="container">
         <div class="row">
             <div class="col-sm-3"></div>

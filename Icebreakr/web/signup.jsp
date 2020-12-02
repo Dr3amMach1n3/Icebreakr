@@ -16,7 +16,7 @@
             <div class="col-sm-3"></div>
             <div class="col">
                 <form action="IcebreakrServlet" method="post">
-                    <input type="hidden" name="action" value="login">
+                    <input type="hidden" name="action" value="register">
                     <div class="row">
                         <div class="spacer align-items-center pb-1">Username: <input name="username" type="text"/></div>
                     </div>
@@ -45,16 +45,27 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                            <div class="spacer">Gender: <select id="gender">
-                                            <option name="g0" value="0">Male</option>
-                                            <option name="g1" value="1">Female</option>
-                                            <option name="g2" value="2">Transgender</option>
-                                            <option name="g3" value="3">Transexual</option>
-                                            <option name="g4" value="4">Non-Binary</option>
-                            </select></div>
+                            <div class="spacer">Gender: 
+                                <select name="gender">
+                                            <option name="gender" value="0">Male</option>
+                                            <option name="gender" value="1">Female</option>
+                                            <option name="gender" value="2">Transgender</option>
+                                            <option name="gender" value="3">Transexual</option>
+                                            <option name="gender" value="4">Non-Binary</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="col">
                             <div class="spacer">Location: <input name="location" type="text" value=""/></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="spacer">Interests/Hobbies<br>
+                            <input type="checkbox" name="g0" value="1">Male </input>
+                            <input type="checkbox" name="g1" value="1">Feamle </input>
+                            <input type="checkbox" name="g2" value="1">Trnasgender </input>
+                            <input type="checkbox" name="g3" value="1">Transexual </input>
+                            <input type="checkbox" name="g4" value="1">Non-Binary </input>
                         </div>
                     </div>
                     <div class="row">
@@ -79,11 +90,11 @@
                     </div>
                     <div class="row">
                         <div class="spacer">Conversation Starters<br>
-                        <textarea id="conversation_starters" class="form-control" rows="8"></textarea>
+                        <textarea name="starters" class="form-control" rows="8"></textarea>
                         </div>
                     </div>
                     <div class="row">
-                        <input type="submit" value="Login">
+                        <input type="submit" value="Register">
                     </div>
                 </form>
             </div>
