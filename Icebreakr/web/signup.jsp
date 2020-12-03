@@ -11,14 +11,39 @@
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom box-shadow">
         <h5 class="my-0 mr-md-auto">Icebreakr</h5>
     </div>
+    <div class="col text-center">
+        <%@ page import="beans.CredentialError" %>
+        <%
+            CredentialError credErr = (CredentialError) session.getAttribute("credErr");
+            String hidden = "hidden";
+            String errMsg = response.getHeader("errMsg");
+            if(errMsg != null){
+                hidden = "";
+            }
+            
+            if(credErr != null){
+                if(credErr.isNameErr()){
+                    errMsg = "Username already taken";
+                    hidden = "";
+                }else if(credErr.isPassErr()){
+                    errMsg = "Password does not match re-entered password";
+                    hidden = "";
+                }else if(credErr.isEmptyErr()){
+                    errMsg = "Please fill out ALL fields";
+                    hidden = "";
+                }
+            }
+        %>
+        <span <%=hidden%> class="alert alert-danger"><%=errMsg%></span> 
+    </div>
+    <br <%=hidden%>>
     <div class="container text-center mb-4">
         <div class="row">
-            <div class="col-sm-3"></div>
             <div class="col">
                 <form action="IcebreakrServlet" method="post">
                     <input type="hidden" name="action" value="register">
                     <div class="row">
-                        <div class="spacer align-items-center pb-1">Username: <input name="username" type="text"/></div>
+                        <div class="spacer align-items-center pb-1">Username: <input name="username" type="text"></div>
                     </div>
                     <div class="row">
                         <div class="spacer align-items-center pb-1">Password: <input name="password" type="text"/></div>
@@ -34,13 +59,13 @@
                             Birthday: 
                         </div>
                         <div class="col">
-                            Year: <input name="year" type="number" min="1900" max ="2020" step="1" size="5" value="2020"/>
+                            Year: <input name="year" type="number" min="1900" max ="2020" step="1" size="5" value="2020" onkeydown="return false"/>
                         </div>
                         <div class="col">
-                            Month: <input name="month" type="number" min="1" max ="12" step="1" size="3" value="1"/>
+                            Month: <input name="month" type="number" min="1" max ="12" step="1" size="3" value="1" onkeydown="return false"/>
                         </div>
                         <div class="col">
-                            Day <input name="day" type="number" min="1" max ="31" step="1" size="3" value="1"/>
+                            Day <input name="day" type="number" min="1" max ="31" step="1" size="3" value="1" onkeydown="return false"/>
                         </div>
                     </div>
                     <div class="row">
@@ -60,10 +85,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="spacer">Interests/Hobbies<br>
+                        <div class="spacer">Who are you interested in?<br>
                             <input type="checkbox" name="g0" value="1">Male </input>
-                            <input type="checkbox" name="g1" value="1">Feamle </input>
-                            <input type="checkbox" name="g2" value="1">Trnasgender </input>
+                            <input type="checkbox" name="g1" value="1">Female </input>
+                            <input type="checkbox" name="g2" value="1">Transgender </input>
                             <input type="checkbox" name="g3" value="1">Transexual </input>
                             <input type="checkbox" name="g4" value="1">Non-Binary </input>
                         </div>

@@ -14,10 +14,20 @@ import java.io.Serializable;
 public class CredentialError implements Serializable{
     private boolean nameErr;
     private boolean passErr;
+    private boolean emptyErr;
     
     public CredentialError() {
         nameErr = false;
         passErr = false;
+        emptyErr = false;
+    }
+
+    public void setEmptyErr(boolean emptyErr) {
+        this.emptyErr = emptyErr;
+    }
+
+    public boolean isEmptyErr() {
+        return emptyErr;
     }
 
     public void setNameErr(boolean nameErr) {

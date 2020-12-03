@@ -18,8 +18,31 @@
     <br>
     <br>
     <br>
-    <span><%=response.getHeader("errMsg")%></span>
     <div class="container">
+        <div class="row">
+            <div class="col text-center">
+                <%@ page import="beans.CredentialError" %>
+                <%
+                    CredentialError credErr = (CredentialError) session.getAttribute("credErr");
+                    String hidden = "hidden";
+                    String errMsg = response.getHeader("errMsg");
+                    if(errMsg != null){
+                        hidden = "";
+                    }
+                    if(credErr != null){
+                        if(credErr.isNameErr()){
+                            errMsg = "Username not found";
+                            hidden = "";
+                        }else if(credErr.isPassErr()){
+                            errMsg = "Incorrect Password";
+                            hidden = "";
+                        }
+                    }
+                %>
+                <span <%=hidden%> class="alert alert-danger"><%=errMsg%></span> 
+            </div>
+        </div>
+        <br <%=hidden%>>
         <div class="row">
             <div class="col-sm-3"></div>
             <div class="col-sm-6 main px-3 mb-5 pt-3 pb-4">

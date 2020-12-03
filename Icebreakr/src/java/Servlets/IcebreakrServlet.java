@@ -81,6 +81,7 @@ public class IcebreakrServlet extends HttpServlet {
             for(int i = 0; i < 5; i++) {
                 int bit = lookingfor & 1;
                 if(bit > 0) {
+                    l_lookingfor.add(Genders.values()[i]);
                     switch(i) {
                         case 0:
                             l_lookingfor.add(Genders.Male);
@@ -296,6 +297,9 @@ public class IcebreakrServlet extends HttpServlet {
                 credErr = new CredentialError();
                 session.setAttribute("credErr", credErr);
             }
+            credErr.setNameErr(false);
+            credErr.setPassErr(false);
+            
             User currentUser = (User) session.getAttribute("currentUser");
             if(currentUser == null){
                 currentUser = new User();
@@ -315,17 +319,16 @@ public class IcebreakrServlet extends HttpServlet {
                 String username = request.getParameter("username");
                 String password = request.getParameter("password");
                 
-                Statement statement = dbConnection.createStatement();
-                ResultSet result = statement.executeQuery("SELECT password FROM User WHERE username='" + username + "'");
+                PreparedStatement statement = dbConnection.prepareStatement("SELECT password FROM User WHERE username=?");
+                statement.setString(1, username);
+                ResultSet result = statement.executeQuery();
                 boolean notEmpty = result.next();
                 
                 if(!notEmpty){
                     credErr.setNameErr(true);
-                    response.setHeader("errMsg", "username");
                     url = "index.jsp";
                 }else if(!password.equals(result.getString("password"))){
                     credErr.setPassErr(true);
-                    response.setHeader("errMsg", "pass");
                     url = "index.jsp";
                 }else{
                     loadUser(currentUser, username, dbConnection);
@@ -339,11 +342,15 @@ public class IcebreakrServlet extends HttpServlet {
                 String password = request.getParameter("password");
                 String repassword = request.getParameter("repassword");
                 
-                Statement statement = dbConnection.createStatement();
-                ResultSet result = statement.executeQuery("SELECT username FROM User WHERE username='" + username + "'");
+                PreparedStatement statement = dbConnection.prepareStatement("SELECT username FROM User WHERE username=?");
+                statement.setString(1, username);
+                ResultSet result = statement.executeQuery();
                 boolean notEmpty = result.next();
                 
+                //Succesful register
                 if(!notEmpty && password.equals(repassword)){
+
+                    
                     String name = request.getParameter("name");
                     String birthday = request.getParameter("year") + "-" + request.getParameter("day") + "-" + request.getParameter("month");
                     String gender = request.getParameter("gender");
@@ -352,10 +359,41 @@ public class IcebreakrServlet extends HttpServlet {
                     String hobbies = getBitString(request, numHobbies, hobbyPrefix);
                     String starters = request.getParameter("starters");
                     
-                    result = statement.executeQuery("INSERT INTO User (username, password, name, birthday, gender, lookingfor, location, hobbies, starters) "
-                            + "VALUES ('" + username + "', '" + password + "', '" + name + "', '" + birthday + "', '" + gender + "', '" + lookingfor + "', '" + location + "', '" + hobbies + "', '" + starters + "')");
-                    loadUser(currentUser, username, dbConnection);
-                    url = "profile.jsp";
+                    if(name != "" && location != "" && starters != "" && password != ""){
+                       statement = dbConnection.prepareStatement("SELECT username FROM User");
+                        result = statement.executeQuery();
+
+                        String createSwipe = "INSERT INTO Swipe (userA,userB) VALUES ";
+                        while(result.next()){
+                            if(result.getRow() != 1){
+                                createSwipe += ", ";
+                            }
+                            createSwipe += "(?,'" + result.getString("username") + "')";
+                        }
+                        statement = dbConnection.prepareStatement(createSwipe);
+                        result.previous();
+                        for(int i = 1; i <= result.getRow(); i++){
+                            statement.setString(i, username);
+                        }
+                        statement.executeUpdate();
+                        
+                        statement = dbConnection.prepareStatement("INSERT INTO User (username, password, name, birthday, gender, lookingfor, location, hobbies, starters) VALUES (?,?,?,?,?,?,?,?,?)");
+                        statement.setString(1, username);
+                        statement.setString(2, password);
+                        statement.setString(3, name);
+                        statement.setString(4, birthday);
+                        statement.setString(5, gender);
+                        statement.setString(6, lookingfor);
+                        statement.setString(7, location);
+                        statement.setString(8, hobbies);
+                        statement.setString(9, starters);
+                        statement.executeUpdate();
+                        loadUser(currentUser, username, dbConnection);
+                        url = "profile.jsp";
+                    }else{
+                        credErr.setEmptyErr(true);
+                        url = "signup.jsp";
+                    } 
                 }else{
                     if(notEmpty){
                         credErr.setNameErr(true);
