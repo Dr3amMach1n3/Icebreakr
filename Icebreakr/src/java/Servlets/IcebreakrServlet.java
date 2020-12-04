@@ -55,6 +55,7 @@ public class IcebreakrServlet extends HttpServlet {
             ResultSet results = ps.executeQuery();
             
             //set all parameters in user to values in database
+            results.next();
             user.setUsername(results.getNString(1));
             user.setPassword(results.getNString(2));
             user.setName(results.getNString(3));
@@ -299,6 +300,7 @@ public class IcebreakrServlet extends HttpServlet {
             }
             credErr.setNameErr(false);
             credErr.setPassErr(false);
+            credErr.setEmptyErr(false);
             
             User currentUser = (User) session.getAttribute("currentUser");
             if(currentUser == null){
@@ -352,7 +354,7 @@ public class IcebreakrServlet extends HttpServlet {
 
                     
                     String name = request.getParameter("name");
-                    String birthday = request.getParameter("year") + "-" + request.getParameter("day") + "-" + request.getParameter("month");
+                    String birthday = request.getParameter("year") + "-" + request.getParameter("month") + "-" + request.getParameter("day");
                     String gender = request.getParameter("gender");
                     String lookingfor = getBitString(request, numGenders, genderPrefix);
                     String location = request.getParameter("location");
@@ -375,7 +377,10 @@ public class IcebreakrServlet extends HttpServlet {
                         for(int i = 1; i <= result.getRow(); i++){
                             statement.setString(i, username);
                         }
-                        statement.executeUpdate();
+                        result.beforeFirst();
+                        if(result.next()){
+                            statement.executeUpdate();
+                        }
                         
                         statement = dbConnection.prepareStatement("INSERT INTO User (username, password, name, birthday, gender, lookingfor, location, hobbies, starters) VALUES (?,?,?,?,?,?,?,?,?)");
                         statement.setString(1, username);
@@ -423,13 +428,18 @@ public class IcebreakrServlet extends HttpServlet {
                 statement.close();
             }else if(action.equals("match")){
                 String username = currentUser.getUsername();
+
                 SwipeQueue swipeQueue = (SwipeQueue) session.getAttribute("swipeQueue");
                 if(swipeQueue == null){
                     swipeQueue = new SwipeQueue();
                     session.setAttribute("swipeQueue", swipeQueue);
                 }
-                String nextUser = swipeQueue.nextUser(username, dbConnection);
-                loadUser(otherUser, nextUser, dbConnection);
+                String nextUser = swipeQueue.peekUser(username, dbConnection);
+                if(nextUser != null){
+                    loadUser(otherUser, nextUser, dbConnection);
+                }else{
+                    otherUser.setUsername(null);
+                }
                 url = "match.jsp";
             }else if(action.equals("swipe")){
                 String username = currentUser.getUsername();
@@ -439,19 +449,22 @@ public class IcebreakrServlet extends HttpServlet {
                     swipeQueue = new SwipeQueue();
                     session.setAttribute("swipeQueue", swipeQueue);
                 }
-                String nextUser = swipeQueue.nextUser(username, dbConnection);
-                swipeQueue.removeNext();
+                String nextUser = swipeQueue.pollUser(username, dbConnection);
                 
                 Statement statement = dbConnection.createStatement();
-                ResultSet result = statement.executeQuery("UPDATE Swipe SET decisionA='" + request.getParameter("swipe") + " WHERE userA='" + username + "' AND userB='" + nextUser + "'");
+                ResultSet result = statement.executeQuery("UPDATE Swipe SET decisionA='" + request.getParameter("swipe") + "' WHERE userA='" + username + "' AND userB='" + nextUser + "'");
                 boolean notEmpty = result.next();
                 
                if(!notEmpty){
-                   result = statement.executeQuery("UPDATE Swipe Set decisionB='" +  request.getParameter("swipe") + "WHERE userB='" + username + "' AND userA='" + nextUser + "'");
+                   result = statement.executeQuery("UPDATE Swipe Set decisionB='" +  request.getParameter("swipe") + "' WHERE userB='" + username + "' AND userA='" + nextUser + "'");
                }
                 
-                username = swipeQueue.nextUser(username, dbConnection);
-                loadUser(otherUser, username, dbConnection);
+                nextUser = swipeQueue.peekUser(username, dbConnection);
+                if(nextUser != null){
+                    loadUser(otherUser, nextUser, dbConnection);
+                }else{
+                    otherUser.setUsername(null);
+                }
                 url = "match.jsp";
             }else if(action.equals("conversation")){
                 Statement statement = dbConnection.createStatement();

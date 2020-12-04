@@ -7,6 +7,7 @@ package beans;
 
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,11 +31,14 @@ public class SwipeQueue implements Serializable{
         swipeQueue = new ArrayBlockingQueue(16);
     }
     
-    public void removeNext() {
-        swipeQueue.remove();
+    public String pollUser(String username, Connection connection) throws SQLException{
+        if(swipeQueue.isEmpty()){
+            loadQueue(username, connection);
+        }
+        return swipeQueue.poll();
     }
     
-    public String nextUser(String username, Connection connection) throws SQLException{
+    public String peekUser(String username, Connection connection) throws SQLException{
         if(swipeQueue.isEmpty()){
             loadQueue(username, connection);
         }
@@ -42,13 +46,14 @@ public class SwipeQueue implements Serializable{
     }
     
     private void loadQueue(String username, Connection connection) throws SQLException {
-        Statement statement = connection.createStatement();
-        ResultSet result = statement.executeQuery("SELECT gender, lookingfor FROM User WHERE username='" + username +"'");
+        PreparedStatement statement = connection.prepareStatement("SELECT gender, lookingfor, hobbies FROM User WHERE username=?");
+        statement.setString(1, username);
+        ResultSet result = statement.executeQuery();
+        result.next();
         int gender = result.getInt("gender");
         int preference = result.getInt("lookingfor");  
         int hobbies = result.getInt("hobbies");
-     
-        result = statement.executeQuery("SELECT username, lookingfor FROM User WHERE " + compatibleGendersQuery(preference));
+        result = statement.executeQuery("SELECT username, lookingfor, hobbies FROM User WHERE " + compatibleGendersQuery(preference));
         
         HashMap<String, Integer> compatibleUsers =  new HashMap<String, Integer>();
         while(result.next()){
@@ -56,40 +61,39 @@ public class SwipeQueue implements Serializable{
                 compatibleUsers.put(result.getString("username"), hobbyScore(hobbies, result.getInt("hobbies")));
             }
         }
-        
         //users you havent swiped on that swiped yes to you
-        result = statement.executeQuery("SELECT userB FROM Swipe WHERE userA='" + username + "' AND (" + compatibleUsersQuery(compatibleUsers, "B") + ") AND decsionB='1' AND decisionA IS NULL");
-        queueByHobbies(result, compatibleUsers, "userB");
+        result = statement.executeQuery("SELECT userB FROM Swipe WHERE userA='" + username + "' AND (" + compatibleUsersQuery(compatibleUsers, "B") + ") AND decisionB='1' AND decisionA IS NULL");
+        queueByHobbies(result, compatibleUsers, "B");
         if(swipeQueue.remainingCapacity() > 0){
-            result = statement.executeQuery("SELECT userA FROM Swipe WHERE userB='" + username + "' AND (" + compatibleUsersQuery(compatibleUsers, "A") + ") AND decsionA='1' AND decisionB IS NULL");
-            queueByHobbies(result, compatibleUsers, "userB");
+            result = statement.executeQuery("SELECT userA FROM Swipe WHERE userB='" + username + "' AND (" + compatibleUsersQuery(compatibleUsers, "A") + ") AND decisionA='1' AND decisionB IS NULL");
+            queueByHobbies(result, compatibleUsers, "A");
         }
         //users you havent swiped on that havent swiped on you
         if(swipeQueue.remainingCapacity() > 0){
-            result = statement.executeQuery("SELECT userB FROM Swipe WHERE userA='" + username + "' AND (" + compatibleUsersQuery(compatibleUsers, "B") + ") AND decsionB IS NULL AND decisionA IS NULL");
-            queueByHobbies(result, compatibleUsers, "userB");
+            result = statement.executeQuery("SELECT userB FROM Swipe WHERE userA='" + username + "' AND (" + compatibleUsersQuery(compatibleUsers, "B") + ") AND decisionB IS NULL AND decisionA IS NULL");
+            queueByHobbies(result, compatibleUsers, "B");
         }
         if(swipeQueue.remainingCapacity() > 0){
-            result = statement.executeQuery("SELECT userA FROM Swipe WHERE userB='" + username + "' AND (" + compatibleUsersQuery(compatibleUsers, "A") + ") AND decsionA IS NULL AND decisionB IS NULL");
-            queueByHobbies(result, compatibleUsers, "userB");
+            result = statement.executeQuery("SELECT userA FROM Swipe WHERE userB='" + username + "' AND (" + compatibleUsersQuery(compatibleUsers, "A") + ") AND decisionA IS NULL AND decisionB IS NULL");
+            queueByHobbies(result, compatibleUsers, "A");
         }
         //users you swiped no to that swiped yes to you
         if(swipeQueue.remainingCapacity() > 0){
-            result = statement.executeQuery("SELECT userB FROM Swipe WHERE userA='" + username + "' AND (" + compatibleUsersQuery(compatibleUsers, "B") + ") AND decsionB='1' AND decisionA='0'");
-            queueByHobbies(result, compatibleUsers, "userB");
+            result = statement.executeQuery("SELECT userB FROM Swipe WHERE userA='" + username + "' AND (" + compatibleUsersQuery(compatibleUsers, "B") + ") AND decisionB='1' AND decisionA='0'");
+            queueByHobbies(result, compatibleUsers, "B");
         }
         if(swipeQueue.remainingCapacity() > 0){
-            result = statement.executeQuery("SELECT userA FROM Swipe WHERE userB='" + username + "' AND (" + compatibleUsersQuery(compatibleUsers, "A") + ") AND decsionA='1' AND decisionB='0'");
-            queueByHobbies(result, compatibleUsers, "userB");
+            result = statement.executeQuery("SELECT userA FROM Swipe WHERE userB='" + username + "' AND (" + compatibleUsersQuery(compatibleUsers, "A") + ") AND decisionA='1' AND decisionB='0'");
+            queueByHobbies(result, compatibleUsers, "A");
         }
         //users you swiped no to that haven't swiped to you
         if(swipeQueue.remainingCapacity() > 0){
-            result = statement.executeQuery("SELECT userB FROM Swipe WHERE userA='" + username + "' AND (" + compatibleUsersQuery(compatibleUsers, "B") + ") AND decsionB IS NULL AND decisionA='0'");
-            queueByHobbies(result, compatibleUsers, "userB");
+            result = statement.executeQuery("SELECT userB FROM Swipe WHERE userA='" + username + "' AND (" + compatibleUsersQuery(compatibleUsers, "B") + ") AND decisionB IS NULL AND decisionA='0'");
+            queueByHobbies(result, compatibleUsers, "B");
         }
         if(swipeQueue.remainingCapacity() > 0){
-            result = statement.executeQuery("SELECT userA FROM Swipe WHERE userB='" + username + "' AND (" + compatibleUsersQuery(compatibleUsers, "A") + ") AND decsionA IS NULL AND decisionB='0'");
-            queueByHobbies(result, compatibleUsers, "userB");
+            result = statement.executeQuery("SELECT userA FROM Swipe WHERE userB='" + username + "' AND (" + compatibleUsersQuery(compatibleUsers, "A") + ") AND decisionA IS NULL AND decisionB='0'");
+            queueByHobbies(result, compatibleUsers, "A");
         }
         
     }
@@ -129,6 +133,7 @@ public class SwipeQueue implements Serializable{
                 compatibleUsersQuery += " OR ";
             }
             compatibleUsersQuery += "user" + suffix + "='" + user + "'";
+            first = false;
         }
         return compatibleUsersQuery;
     }
@@ -161,12 +166,14 @@ public class SwipeQueue implements Serializable{
         return returnMe;
     }
     
-   private void queueByHobbies(ResultSet result, HashMap<String, Integer> compatibleUsers, String userString) throws SQLException{
+   private void queueByHobbies(ResultSet result, HashMap<String, Integer> compatibleUsers, String suffix) throws SQLException{
        HashMap<String, Integer> queueWorthy = new HashMap();
        while(result.next()){
-           String username = result.getString(userString);
+           String username = result.getString("user" + suffix);
            queueWorthy.put(username, compatibleUsers.get(username));
        }
-       swipeQueue.addAll(sortUsersMap(queueWorthy));
+       if(!queueWorthy.isEmpty()){
+           swipeQueue.addAll(sortUsersMap(queueWorthy));
+       }
    }
 }

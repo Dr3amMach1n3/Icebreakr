@@ -11,77 +11,95 @@
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom box-shadow">
         <h5 class="my-0 mr-md-auto">Icebreakr</h5>
         <nav class="my-2 my-md-0 mr-md-3">
-            <form action="IcebreakrServlet" method="post">
-                <input type="hidden" name="action" value="match">
-                <input class="p-2 text-dark font-weight-bold" type="submit" value="Start Matching!">
-            </form>
-            <form action="IcebreakrServlet" method="post">
-                <input type="hidden" name="action" value="conversation">
-                <input class="p-2 text-dark" type="submit" value="Conversations">
-            </form>
-                        <form action="IcebreakrServlet" method="post">
-                <input type="hidden" name="action" value="profile">
-                <input class="p-2 text-dark" type="submit" value="My Profile">
-            </form>
+            <div class="btn-group">
+                <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
+                    <input type="hidden" name="action" value="match">
+                    <button class="btn btn-info my-2 my-sm-0" type="submit">Start Matching!</button>
+                </form>
+                <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
+                    <input type="hidden" name="action" value="conversation">
+                    <button class="btn btn-warning my-2 my-sm-0" type="submit">Conversations</button
+                </form>
+                <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
+                    <input type="hidden" name="action" value="profile">
+                    <button class="btn btn-success my-2 my-sm-0" type="submit" >My Profile</button>
+                </form>
+                <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
+                    <input type="hidden" name="action" value="logout">
+                    <button class="btn btn-danger my-2 my-sm-0" type="submit" >Logout</button>
+                </form>
+            </div>
         </nav> 
-        <a class="btn btn-outline-primary" href="index.html">Logout</a>
     </div>
-    <div class="container spacer_large">
-        <div class="row">
-            <div class="col">
-                <div class="spacer text-center">${otherUser.name}</div>
+    <c:if test=${not empty otherUser.name}>
+        <div class="container spacer_large">
+            <div class="row">
+                <div class="col">
+                    <div class="spacer text-center">${otherUser.name}</div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="spacer text-center">Age: ${otherUser.age}</div>
+            <div class="row">
+                <div class="col">
+                    <%@ page import="beans.User" %>
+                    <%
+                        User otherUser = (User) session.getAttribute("otherUser");
+                        int age = 0;
+                        if(otherUser != null){
+                            age = otherUser.generateAge();
+                        }
+                    %>
+                    <div class="spacer text-center">Age: <%=age%></div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="spacer text-center">Gender: ${otherUser.gender}</div>
+            <div class="row">
+                <div class="col">
+                    <div class="spacer text-center">Gender: ${otherUser.gender}</div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="spacer text-center">Location: ${otherUser.location}</div>
+            <div class="row">
+                <div class="col">
+                    <div class="spacer text-center">Location: ${otherUser.location}</div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="spacer text-center">Hobbies/Interests:<br>
-                    <%boolean first=true;
-                    String commaSpace = "";%>
-                    <c:forEach var="hobby" items="${otherUser.hobbies}">
-                        <span><%=commaSpace%>${hobby}</span>
-                        <%if(first==true){
-                            first = false;
-                            commaSpace = ", ";}%>
-                    </c:forEach>
+            <div class="row">
+                <div class="col">
+                    <div class="spacer text-center">Hobbies/Interests:<br>
+                        <%boolean first=true;
+                        String commaSpace = "";%>
+                        <c:forEach var="hobby" items="${otherUser.hobbies}">
+                            <span><%=commaSpace%>${hobby}</span>
+                            <%if(first==true){
+                                first = false;
+                                commaSpace = ", ";}%>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="spacer text-center">${otherUser.starters }</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col spacer_large text-center">
+                    <form id="form1" action="IcebreakrServlet" method="post">
+                        <input type="hidden" name="action" value="swipe">
+                        <input type="hidden" name="swipe" value="1">
+                        <input type="submit" value="Yay!" class="btn btn-success">
+                    </form>
+                </div>
+                <div class="col spacer_large text-center">
+                    <form id="form2" action="IcebreakrServlet" method="post">
+                        <input type="hidden" name="action" value="swipe">
+                        <input type="hidden" name="swipe" value="0"> 
+                        <input type="submit" value="Nay!" class="btn btn-danger">
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="spacer text-center">${otherUser.starters }</div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col spacer_large text-center">
-                <form id="form1" action="IcebreakrServlet" method="post">
-                    <input type="hidden" name="action" value="swipe">
-                    <input type="hidden" name="swipe" value="1">
-                    <input type="submit" value="Yay!" class="btn btn-success">
-                </form>
-            </div>
-            <div class="col spacer_large text-center">
-                <form id="form2" action="IcebreakrServlet" method="post">
-                    <input type="hidden" name="action" value="swipe">
-                    <input type="hidden" name="swipe" value="0"> 
-                    <input type="submit" value="Nay!" class="btn btn-danger">
-                </form>
-            </div>
-        </div>
-    </div>
+    </c:if>
+    <c:if test=${empty otherUser.name}>
+        <div>Sorry, there are no more compatible users at this time, please check back later</div>
+    </c:if>
 </body>
 </html>
