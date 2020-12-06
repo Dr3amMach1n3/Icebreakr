@@ -5,26 +5,51 @@
  */
 package beans;
 
-import java.beans.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 /**
  *
- * @author Pierce
+ * @author Pierce, Logan
  */
 public class User implements Serializable{
     public enum Hobbies {Yoga, Musician, Singing, Dancing, Art, Hiking, Biking,
     Swimming, Cooking, Gardening, Driving, Comedy, Fighting, Philosophy, Buisness, Investing}
-    public enum Genders {Male, Female, Transgender, Transsexual, Non_Binary}
-    public enum HairColors {Brown, Bald, Blonde, Dirty_Blonde, Black, Auburn, Ginger,
-    Gray, White, Silver, Red, Orange, Yellow, Green, Blue, Multi_Colored}
+    public enum Genders {
+        Male, Female, Transgender, Transsexual, Non_Binary;
+        @Override
+        public String toString() {
+            if(null == this) {
+                return "";
+            } else switch (this) {
+                    case Non_Binary:
+                        return "Non Binary";
+                    default:
+                        return this.name();
+                }
+        }
+    }
+    public enum HairColors {
+        Brown, Bald, Blonde, Dirty_Blonde, Black, Auburn, Ginger,Gray, White, Silver, Red, Orange, Yellow, Green, Blue, Multi_Colored;
+        @Override
+        public String toString() {
+            if(null == this) {
+                return "";
+            } else switch (this) {
+                    case Multi_Colored:
+                        return "Multi-Colored";
+                    default:
+                        return this.name();
+                }
+        }
+    }
+    
     private String username;
     private String password;
     private String name;
     private Date birthday;
-    private String gender;
+    private Genders gender;
     private ArrayList<Genders> lookingfor;
     private String location;
     private ArrayList<Hobbies> hobbies;
@@ -35,7 +60,7 @@ public class User implements Serializable{
     private String zodiac;
     private int children;
     private int weight;
-    private String eyecolor;
+    private String eyeColor;
     private String ethnicity;
     private boolean glasses;
 
@@ -55,7 +80,7 @@ public class User implements Serializable{
         zodiac = null;
         children = 0;
         weight = 0;
-        eyecolor = null;
+        eyeColor = null;
         ethnicity = null;
         glasses = false; 
     }
@@ -76,7 +101,7 @@ public class User implements Serializable{
         this.birthday = birthday;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Genders gender) {
         this.gender = gender;
     }
     
@@ -121,7 +146,7 @@ public class User implements Serializable{
     }
 
     public void setEyecolor(String eyecolor) {
-        this.eyecolor = eyecolor;
+        this.eyeColor = eyecolor;
     }
 
     public void setEthnicity(String ethnicity) {
@@ -148,7 +173,7 @@ public class User implements Serializable{
         return birthday;
     }
 
-    public String getGender() {
+    public Genders getGender() {
         return gender;
     }
     
@@ -193,7 +218,7 @@ public class User implements Serializable{
     }
 
     public String getEyecolor() {
-        return eyecolor;
+        return eyeColor;
     }
 
     public String getEthnicity() {
@@ -204,31 +229,156 @@ public class User implements Serializable{
         return glasses;
     }
     
+    /** Use the birthday to return the current age
+     * 
+     * @return this user's current age in years
+     */
     public int generateAge() {
+        /* java.Date is deprecated, so convert to java.Calendar */
         long time = birthday.getTime();
+        
         Calendar now = Calendar.getInstance();
         Calendar bday = Calendar.getInstance();
         bday.setTimeInMillis(time);
-        int age = now.get(now.YEAR) - bday.get(bday.YEAR);
-        if(now.get(now.DAY_OF_YEAR) < bday.get(bday.DAY_OF_YEAR)) {
+        
+        int age = now.YEAR - bday.YEAR;
+        /* account for when user hasn't had birthday yet */
+        if(now.DAY_OF_YEAR < bday.DAY_OF_YEAR) {
             age = age - 1;
         }
+        
         return age;
     }
     
-    public String toString(Genders gender) {
-        if(gender == Genders.Non_Binary) {
-            return "Non Binary";
+    /** Generates a yes/no response to the question "Does this user wear glasses"
+     * 
+     * @return either "yes" or "no" depending on the glasses var
+     */
+    public String wearsGlasses() {
+        if(this.glasses) {
+            return "Yes";
         } else {
-            return gender.name();
+            return "No";
         }
     }
     
-    public String toString(HairColors hairColor) {
-        if(hairColor == HairColors.Multi_Colored) {
-            return "Multi-Colored";
-        } else {
-            return hairColor.name();
+    /** Finds the user's Zodiac symbol based on their birthday
+     * 
+     * @return the user's Zodiac as a string
+     */
+    public String generateZodiac() {
+        /* java.Date is deprecated, so convert to java.Calendar */
+        long time = birthday.getTime();
+        
+        Calendar bday = Calendar.getInstance();
+        bday.setTimeInMillis(time);
+        
+        int month = bday.MONTH;
+        int day = bday.DAY_OF_MONTH;
+        
+        switch(month) {
+            case 1:
+                if(day < 20) {
+                    return "Capricorn";
+                } else {
+                    return "Aquarius";
+                }
+            case 2:
+                if(day < 19) {
+                    return "Aquarius";
+                } else {
+                    return "Pisces";
+                }
+            case 3:
+                if(day < 21) {
+                    return "Pisces";
+                } else {
+                    return "Aries";
+                }
+            case 4:
+                if(day < 20) {
+                    return "Aries";
+                } else {
+                    return "Taurus";
+                }
+            case 5:
+                if(day < 21) {
+                    return "Taurus";
+                } else {
+                    return "Gemini";
+                }
+            case 6:
+                if(day < 21) {
+                    return "Gemini";
+                } else {
+                    return "Cancer";
+                }
+            case 7:
+                if(day < 23) {
+                    return "Cancer";
+                } else {
+                    return "Leo";
+                }
+            case 8:
+                if(day < 23) {
+                    return "Leo";
+                } else {
+                    return "Virgo";
+                }
+            case 9:
+                if(day < 23) {
+                    return "Virgo";
+                } else {
+                    return "Libra";
+                }
+            case 10:
+                if(day < 23) {
+                    return "Libra";
+                } else {
+                    return "Scorpio";
+                }
+            case 11:
+                if(day < 22) {
+                    return "Scorpio";
+                } else {
+                    return "Sagittarius";
+                }
+            case 12:
+                if(day < 22) {
+                    return "Sagittarius";
+                } else {
+                    return "Capricorn";
+                }
+            default:
+                return "Scorpio";
         }
+    }
+    
+    /** Create a String list of desired genders
+     * 
+     * @return the list of desired genders
+     */
+    public String generateLookingFor() {
+        String return_string = new String();
+        for(Genders g : this.lookingfor) {
+            return_string = return_string.concat(g.toString());
+            return_string = return_string.concat(", ");
+        }
+        return_string = return_string.substring(0, return_string.length() - 3); //remove last ", "
+        return return_string;
+    }
+    
+    /** Create a String list of hobbies
+     * 
+     * @return the list of hobbies
+     */
+    public String generateHobbies() {
+        String return_string = new String();
+        for(Hobbies h : this.hobbies) {
+            return_string = return_string.concat(h.toString());
+            return_string = return_string.concat(", ");
+        }
+        return_string = return_string.substring(0, return_string.length() - 3); //remove last ", "
+        return return_string;
     }
 }
