@@ -39,118 +39,110 @@
             <div class="col">
                 <div class="row">
                     <div class="col">
-                        <div class="spacer">
-                            Name: <span>
-                                <form action="IcebreakrServlet" method="post">
-                                    <input type="hidden" name="action" value="profile">
-                                    <input type=text name="name" id="name" value="${profile.user.name}">
-                                </form>  
-                            </span>
-                        </div>
+                        <div class="spacer">Name: <span id="name" value="${profile.currentUser.name}"></span></div>
                     </div>
                     <div class="col">
-                        <div class="spacer">
-                            Location: <form action="" method="post">
-                                <input type=text id="location" value="${user.location}">
-                            </form>
-                        </div>
+                        <div class="spacer">Location: <span id="location" value="${profile.currentUser.location}"></span></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="spacer">
-                            Age: <form action="" method="post">
-                                <input type=text id="age" value="${user.generateAge()}">
-                            </form>
-                        </div>
+                        <div class="spacer">Age: <span id="age" value="${profile.currentUser.generateAge()}"></span></div>
                     </div>
                     <div class="col">
-                        <div class="spacer">
-                            Gender: <form action="" method="post">
-                                <input type=text id="gender" value="${user.gender}">
-                        </div>
+                        <div class="spacer">Gender: <span id="gender" value="${profile.currentUser.gender.toString()}"></span></div>
                     </div>
                 </div>                
             </div>
         </div>
         <div>Pictures: <span id="picture_count">1</span></div>
         <a href="pictures.html" >Manage Pictures</a>
-        <div class="row">
-            <div class="col">
-                <div class="row">
-                    <div class="spacer">Height: <input id="height_feet" type="number" min="2" max ="9" step="1" size="1" value="6"/>ft. <input id="height_inches" type="number" min="0" max ="11" step="1" size="1" value="2"/>in.</div>
+        <form action="IcebreakrServlet" method="post">
+            <input type="hidden" name="action" value="update_profile">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="spacer">Height: <input id="height_feet" type="number" min="2" max ="9" step="1" size="1" value="${profile.currentUser.heightFeet}"/>ft. <input id="height_inches" type="number" min="0" max ="11" step="1" size="1" value="${profile.currentUser.heightInches}"/>in.</div>
+                    </div>
+                    <div class="row">
+                        <div class="spacer">
+                            Hair: <select id="hair_color" value="${profile.currentUser.hairColor.toString()}">
+                                <option value="Brown">Brown</option>
+                                <option value="Bald">Bald</option>
+                                <option value="Blonde">Blonde</option>
+                                <option value="Dirty Blonde">Dirty Blonde</option>
+                                <option value="Black">Black</option>
+                                <option value="Auburn">Auburn</option>
+                                <option value="Ginger">Ginger</option>
+                                <option value="Gray">Gray</option>
+                                <option value="White">White</option>
+                                <option value="Silver">Silver</option>
+                                <option value="Red">Red</option>
+                                <option value="Orange">Orange</option>
+                                <option value="Yellow">Yellow</option>
+                                <option value="Green">Green</option>
+                                <option value="Blue">Blue</option>
+                                <option value="Multi-Colored">Multi-Colored</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="spacer">Zodiac Sign: <span id="zodiac" value="${profile.currentUser.generateZodiac()}"></span></div>
+                    </div>
+                    <div class="row">
+                        <div class="spacer">Children: <input id="num_children" type="number" min="0" max ="70" step="1" size="1" value="${profile.currentUser.children}"/></div>
+                    </div>
+                    <div class="row">
+                        <div class="spacer">Ethnicity: <input id="ethnicity" type="text" value="${profile.currentUser.ethnicity}"/></div>
+                    </div>
+                    <div class="row">
+                        <div class="spacer">Glasses: <select id="glasses" value="${profile.currentUser.wearsGlasses()}">
+                                    <option value="0">Yes</option>
+                                    <option value="1">No</option>
+                        </select></div>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="spacer">Hair: <select id="hair">
-		                <option value="Brown">Brown</option>
-		                <option value="Bald">Bald</option>
-		                <option value="Blonde">Blonde</option>
-		                <option value="Dirty Blonde">Dirty Blonde</option>
-		                <option value="Black">Black</option>
-		                <option value="Auburn">Aubrun</option>
-		                <option value="Ginger">Ginger</option>
-		                <option value="Gray">Gray</option>
-		                <option value="White">White</option>
-		                <option value="Silver">Silver</option>
-		                <option value="Red">Red</option>
-		                <option value="Orange">Orange</option>
-		                <option value="Yellow">Yellow</option>
-		                <option value="Green">Green</option>
-		                <option value="Blue">Blue</option>
-		                <option value="Multi-Colored">Multi-Colored</option>
-                    </select></div>
-                </div>
-                <div class="row">
-                    <div class="spacer">Zodiac Sign: <select id="zodiac">
-		                <option value = "Aries">Aries</option>
-		                <option value = "Leo">Leo</option>
-		                <option value = "Cancer">Cancer</option>
-		                <option value = "Pisces">Pisces</option>
-		                <option value = "Scorpio">Scorpio</option>
-		                <option value = "Taurus">Taurus</option>
-		                <option value = "Sagittarius">Sagittarius</option>
-		                <option value = "Gemini">Gemini</option>
-		                <option value = "Virgo">Virgo</option>
-		                <option value = "Libra">Libra</option>
-		                <option value = "Libra">Libra</option>
-		                <option value = "Capricorn">Capricorn</option>
-		                <option value = "Aquarius">Aquarius</option>
-                    </select></div>
-                </div>
-                <div class="row">
-                    <div class="spacer">Children: <input id="num_children" type="number" min="0" max ="70" step="1" size="1" value="0"/></div>
-                </div>
-                <div class="row">
-                    <div class="spacer">Ethnicity: <input id="ethnicity" type="text" value="White and Nerdy"/></div>
-                </div>
-                <div class="row">
-                    <div class="spacer">Glasses: <select id="glasses">
-		                <option value="Sometimes">Sometimes</option>
-		                <option value="No">Yes</option>
-		                <option value="No">No</option>
-                    </select></div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="row">
-                    <div class="spacer">Interests/Hobbies<br>
-                    <select id="interests_hobbies">
-		                <option value="Fitness">Fitness</option>
-		                <option value="Music">Music</option>
-		                <option value="Art">Art</option>
-		                <option value="Musician">Musician</option>
-		                <option value="Hiking">Hiking</option>
-		                <option value="Biking">Biking</option>
-		                <option value="Cooking">Cooking</option>
-                    </select></div>
-                </div>
-                <div class="row">
-                    <div class="spacer">Conversation Starters<br>
-                    <textarea id="conversation_starters" class="form-control" rows="8">Is there funk after death?</textarea>
+                <div class="col">
+                    <div class="row">
+                        <div class="spacer">Interested in<br>
+                            <input type="checkbox" name="g0" value="1">Male</input>
+                            <input type="checkbox" name="g1" value="1">Female</input>
+                            <input type="checkbox" name="g2" value="1">Transgender</input>
+                            <input type="checkbox" name="g3" value="1">Transsexual</input>
+                            <input type="checkbox" name="g4" value="1">Non-Binary</input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="spacer">Hobbies<br>
+                            <input type="checkbox" name="h0" value="1">Yoga </input>
+                            <input type="checkbox" name="h1" value="1">Musician </input>
+                            <input type="checkbox" name="h2" value="1">Singing </input>
+                            <input type="checkbox" name="h3" value="1">Dancing </input>
+                            <input type="checkbox" name="h4" value="1">Art </input>
+                            <input type="checkbox" name="h5" value="1">Hiking </input>
+                            <input type="checkbox" name="h6" value="1">Biking </input>
+                            <input type="checkbox" name="h7" value="1">Swimming </input>
+                            <input type="checkbox" name="h8" value="1">Cooking </input>
+                            <input type="checkbox" name="h9" value="1">Gardening </input>
+                            <input type="checkbox" name="h10" value="1">Driving </input>
+                            <input type="checkbox" name="h11" value="1">Comedy </input>
+                            <input type="checkbox" name="h12" value="1">Fighting </input>
+                            <input type="checkbox" name="h13" value="1">Philosophy </input>
+                            <input type="checkbox" name="h14" value="1">Business </input>
+                            <input type="checkbox" name="h15" value="1">Investing </input>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="spacer">Conversation Starters<br>
+                        <textarea id="conversation_starters" class="form-control" rows="8" value="${profile.currentUser.starters}"></textarea>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="row">
+                <input type="submit" value="Update Profile">
+            </div>
+        </form>
     </div>
 </body>
 </html>
