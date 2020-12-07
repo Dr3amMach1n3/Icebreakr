@@ -21,7 +21,7 @@
                  </form>
                  <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
                      <input type="hidden" name="action" value="conversation">
-                     <button class="btn my-2 my-sm-0" type="submit">Conversations</button
+                     <button class="btn my-2 my-sm-0" type="submit">Conversations</button>
                  </form>
                  <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
                      <input type="hidden" name="action" value="profile">
