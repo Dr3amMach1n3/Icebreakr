@@ -429,7 +429,7 @@ public class IcebreakrServlet extends HttpServlet {
             /* code for when a user updates their profile */
             }else if(action.equals("update_profile")){
                 /* get the updated info */
-                String username = request.getParameter("username");
+                String username = currentUser.getUsername();
                 String gender = request.getParameter("gender");
                 String lookingfor = getBitString(request, numGenders, genderPrefix);
                 String location = request.getParameter("location");
