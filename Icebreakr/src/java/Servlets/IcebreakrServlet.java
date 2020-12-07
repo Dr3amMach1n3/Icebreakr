@@ -549,7 +549,7 @@ public class IcebreakrServlet extends HttpServlet {
                 
                 Messages messages = new Messages();
                 
-                messages.addTarget(other);
+                messages.setTarget(other);
                 while(result.next()) {
                     messages.addSender(result.getString("sender"));
                     messages.addReceiver(result.getString("receiver"));
