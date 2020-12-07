@@ -52,7 +52,7 @@
         	<a class="btn container secondary pt-1 pb-1 text-center mt-3 mb-3">
                     <form action="IcebreakrServlet" method="post">
                         <input type="hidden" name="action" value="other_user">
-                        <input type="hidden" name="target" value="${messages.target.getName()}">
+                        <input type="hidden" name="target" value="${messages.target.getUsername()}">
                         <input type="submit" value="${messages.target.getName()}">
                     </form>
     		</a>
