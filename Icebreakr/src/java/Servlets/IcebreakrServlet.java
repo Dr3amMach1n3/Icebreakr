@@ -65,7 +65,7 @@ public class IcebreakrServlet extends HttpServlet {
             user.setPassword(results.getNString(2));
             user.setName(results.getNString(3));
             user.setBirthday(results.getDate(4));
-            user.setAge_string();
+            user.setAge_string(Integer.toString(user.generateAge()));
             int gender = results.getInt(5);
             switch(gender) {
                 case 0:
@@ -83,7 +83,7 @@ public class IcebreakrServlet extends HttpServlet {
                 default:
                     user.setGender(Genders.Non_Binary);
             }
-            user.setGender_string();
+            user.setGender_string(user.getGender().toString());
             int lookingfor = results.getInt(6);
             ArrayList<Genders> l_lookingfor = new ArrayList<>();
             for(int i = 0; i < 5; i++) {
@@ -110,7 +110,7 @@ public class IcebreakrServlet extends HttpServlet {
                 lookingfor = lookingfor >> 1;
             }
             user.setLookingfor(l_lookingfor);
-            user.setLookingfor_string();
+            user.setLookingfor_string(user.generateLookingFor());
             user.setLocation(results.getNString(7));
             int hobbies = results.getInt(8);
             ArrayList<Hobbies> l_hobbies = new ArrayList<>();
@@ -170,7 +170,7 @@ public class IcebreakrServlet extends HttpServlet {
                 hobbies = hobbies >> 1;
             }
             user.setHobbies(l_hobbies);
-            user.setHobbies_string();
+            user.setHobbies_string(user.generateHobbies());
             user.setStarters(results.getNString(9));
             int height = results.getInt(10);
             user.setHeightInches(height % 12);
@@ -225,12 +225,12 @@ public class IcebreakrServlet extends HttpServlet {
                 default:
                     user.setHairColor(HairColors.Multi_Colored);
             }
-            user.setHairColor_string();
+            user.setHairColor_string(user.getHairColor().toString());
             user.setChildren(results.getInt(13));
             user.setWeight(results.getInt(14));
             user.setEthnicity(results.getNString(16));
             user.setGlasses(results.getBoolean(17));
-            user.setGlasses_string();
+            user.setGlasses_string(user.wearsGlasses());
         } catch (SQLException ex) {
             Logger.getLogger(IcebreakrServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
