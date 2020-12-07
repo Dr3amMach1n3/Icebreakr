@@ -25,44 +25,70 @@ public class Pictures implements Serializable{
     private String picture9;
     private int pictureCount;
     
+    public Pictures() {
+        ArrayList<String> pictures = new ArrayList<>();
+        for(int i = 0; i < 9; i++) {
+            pictures.add("test.jpg");
+        }
+        picture1 = "test.jpg";
+        picture2 = "test.jpg";
+        picture3 = "test.jpg";
+        picture4 = "test.jpg";
+        picture5 = "test.jpg";
+        picture6 = "test.jpg";
+        picture7 = "test.jpg";
+        picture8 = "test.jpg";
+        picture9 = "test.jpg";
+        pictureCount = 0;
+    }
+    
     public void setPictures(ArrayList<String> pictures) {
         this.pictures = pictures;
     }
     
     public void setPicture1(String url) {
         this.picture1 = url;
+        this.pictures.set(1, url);
     }
     
     public void setPicture2(String url) {
         this.picture1 = url;
+        this.pictures.set(2, url);
     }
     
     public void setPicture3(String url) {
         this.picture1 = url;
+        this.pictures.set(3, url);
     }
     
     public void setPicture4(String url) {
         this.picture1 = url;
+        this.pictures.set(4, url);
     }
     
     public void setPicture5(String url) {
         this.picture1 = url;
+        this.pictures.set(5, url);
     }
     
     public void setPicture6(String url) {
         this.picture1 = url;
+        this.pictures.set(6, url);
     }
     
     public void setPicture7(String url) {
         this.picture1 = url;
+        this.pictures.set(7, url);
     }
     
     public void setPicture8(String url) {
         this.picture1 = url;
+        this.pictures.set(8, url);
     }
     
     public void setPicture9(String url) {
         this.picture1 = url;
+        this.pictures.set(9, url);
     }
     
     public void setPictureCount() {
@@ -112,6 +138,7 @@ public class Pictures implements Serializable{
     }
     
     public int getPictureCount() {
+        this.setPictureCount();
         return pictureCount;
     }
 
