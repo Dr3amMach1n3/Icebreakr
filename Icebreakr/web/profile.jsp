@@ -14,15 +14,15 @@
              <div class="btn-group">
                  <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
                      <input type="hidden" name="action" value="match">
-                     <button class="btn btn-info my-2 my-sm-0" type="submit">Start Matching!</button>
+                     <button class="btn text-dark font-weight-bold my-2 my-sm-0" type="submit">Start Matching!</button>
                  </form>
                  <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
                      <input type="hidden" name="action" value="conversation">
-                     <button class="btn btn-warning my-2 my-sm-0" type="submit">Conversations</button
+                     <button class="btn my-2 my-sm-0" type="submit">Conversations</button
                  </form>
                  <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
                      <input type="hidden" name="action" value="profile">
-                     <button class="btn btn-success my-2 my-sm-0" type="submit" >My Profile</button>
+                     <button class="btn my-2 my-sm-0" type="submit" >My Profile</button>
                  </form>
                  <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
                      <input type="hidden" name="action" value="logout">
@@ -142,7 +142,7 @@
                 </div>
             </div>
             <div class="row">
-                <input type="submit" value="update_profile">
+                <button class="btn-default" type="submit">Update Profile</button>
             </div>
         </form>
     </div>
