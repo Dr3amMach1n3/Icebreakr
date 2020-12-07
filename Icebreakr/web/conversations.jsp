@@ -43,7 +43,7 @@
                     </form>
     		</a>
     		<div class="container secondary pt-3 pb-3 mb-4">
-                    <c:forEach var="message" begin = "1" end = "${fn:length(messages.content)}">
+                    <c:forEach var="message" begin = "1" end = "${messages.getLength()}">
                         <c:choose>
                             <c:when test = "${messages.getSender(message) == currentUser.getUsername()}">
                                 <div class="row">
