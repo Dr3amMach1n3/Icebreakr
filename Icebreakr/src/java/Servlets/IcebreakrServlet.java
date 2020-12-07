@@ -734,9 +734,29 @@ public class IcebreakrServlet extends HttpServlet {
                 
                 /* attempt to insert the new data into the database */
                 for(int i = 1; i < 10; i++) {
-                    String proccessing = "url".concat(Integer.toString(i));
                     PreparedStatement statement = dbConnection.prepareStatement("UPDATE Photo SET source=? WHERE Photo.username=? AND Photo.position=?");
-                    statement.setString(1, proccessing);
+                    switch(i) {
+                        case 1:
+                            statement.setString(1, url1);
+                        case 2:
+                            statement.setString(1, url2);
+                        case 3:
+                            statement.setString(1, url3);
+                        case 4:
+                            statement.setString(1, url4);
+                        case 5:
+                            statement.setString(1, url5);
+                        case 6:
+                            statement.setString(1, url6);
+                        case 7:
+                            statement.setString(1, url7);
+                        case 8:
+                            statement.setString(1, url8);
+                        case 9:
+                            statement.setString(1, url9);
+                        default:
+                            statement.setString(1, url1);
+                    }
                     statement.setString(2, username);
                     statement.setString(3, Integer.toString(i));
                     statement.executeUpdate();
