@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                                 </c:when>
-                                <c:otherwise>
+                                <c:when test = "${messages.getSender(message) != conversations.getCurrentUsername()}">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="container secondary pt-1 pb-1 mt-1 mb-1 border border-dark">
@@ -79,7 +79,7 @@
                                     </div>
                                     <div class="col-sm-6>"></div>
                                 </div>
-                            </c:otherwise>
+                            </c:when>
                         </c:choose>
                     </c:forEach>
                     </c:if>
