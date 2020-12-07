@@ -253,26 +253,34 @@ public class IcebreakrServlet extends HttpServlet {
             
                 //set all parameters in user to values in database
                 String url = results.getNString(2);
-                int pos = results.getInt(3);
-                switch(pos) {
+                switch(i) {
                     case 1:
                         pictures.setPicture1(url);
+                        break;
                     case 2:
                         pictures.setPicture2(url);
+                        break;
                     case 3:
                         pictures.setPicture3(url);
+                        break;
                     case 4:
                         pictures.setPicture4(url);
+                        break;
                     case 5:
                         pictures.setPicture5(url);
+                        break;
                     case 6:
                         pictures.setPicture6(url);
+                        break;
                     case 7:
                         pictures.setPicture7(url);
+                        break;
                     case 8:
                         pictures.setPicture8(url);
+                        break;
                     case 9:
                         pictures.setPicture9(url);
+                        break;
                 }
                 ps.close();
                 results.close();
@@ -735,22 +743,31 @@ public class IcebreakrServlet extends HttpServlet {
                     switch(i) {
                         case 1:
                             statement.setString(1, url1);
+                            break;
                         case 2:
                             statement.setString(1, url2);
+                            break;
                         case 3:
                             statement.setString(1, url3);
+                            break;
                         case 4:
                             statement.setString(1, url4);
+                            break;
                         case 5:
                             statement.setString(1, url5);
+                            break;
                         case 6:
                             statement.setString(1, url6);
+                            break;
                         case 7:
                             statement.setString(1, url7);
+                            break;
                         case 8:
                             statement.setString(1, url8);
+                            break;
                         case 9:
                             statement.setString(1, url9);
+                            break;
                         default:
                             statement.setString(1, url1);
                     }
