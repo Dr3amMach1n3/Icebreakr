@@ -83,10 +83,10 @@
                 <div class="row">
                     <div class="spacer">Hobbies<br>${otherUser.hobbies_string}</div>
                 </div>
-                <div class="row">
-                    <div class="spacer">Conversation Starters<br>${otherUser.starters}</div>
-                </div>
             </div>
+        </div>
+        <div class="row">
+            <div class="spacer">Conversation Starters<br>${otherUser.starters}</div>
         </div>
     </div>
 </body>
