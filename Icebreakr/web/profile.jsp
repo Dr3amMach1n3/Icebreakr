@@ -62,12 +62,15 @@
             <div class="row">
                 <div class="col">
                     <div class="row">
-                        <div class="spacer">Height: <input id="height_feet" type="number" min="0" max ="9" step="1" size="1" value="${currentUser.heightFeet}"/> ft. <input id="height_inches" type="number" min="0" max ="11" step="1" size="1" value="${currentUser.heightInches}"/> in.</div>
+                        <div class="spacer">
+                            Height: ${currentUser.heightFeet} ft. ${currentUser.heightInches} in.<br>Change selection below:<br>
+                            <input id="height_feet" type="number" min="0" max ="9" step="1" size="1"/> ft. <input id="height_inches" type="number" min="0" max ="11" step="1" size="1"/> in.
+                        </div>
                     </div>
                     <div class="row">
                         <div class="spacer">
-                            Hair: <select id="hair_color">
-                                <option value="${currentUser.hairColor}">Currently ${currentUser.hairColor_string}</option>
+                            Hair: ${currentUser.hairColor_string}<br>Change selection below:<br>
+                            <select id="hair_color">
                                 <option value="Brown">Brown</option>
                                 <option value="Bald">Bald</option>
                                 <option value="Blonde">Blonde</option>
@@ -91,14 +94,18 @@
                         <div class="spacer">Zodiac Sign: <span id="zodiac">${currentUser.zodiac}</span></div>
                     </div>
                     <div class="row">
-                        <div class="spacer">Children: <input id="num_children" type="number" min="0" max ="70" step="1" size="1" value="${currentUser.children}"/></div>
+                        <div class="spacer">Children: ${currentUser.children}<br>Change selection below:<br>
+                            <input id="num_children" type="number" min="0" max ="70" step="1" size="1"/>
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="spacer">Ethnicity: <input id="ethnicity" type="text" value="${currentUser.ethnicity}"/></div>
+                        <div class="spacer">Ethnicity: ${currentUser.ethnicity}<br>Change selection below:<br>
+                            <input id="ethnicity" type="text" value="${currentUser.ethnicity}"/>
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="spacer">Glasses: <select id="glasses">
-                                    <option value="${currentUser.glasses}">Currently ${currentUser.glasses_string}</option>
+                        <div class="spacer">Glasses: ${currentUser.glasses_string}<br>Change selection below:<br>
+                            <select id="glasses">
                                     <option name="glasses" value="yes">Yes</option>
                                     <option name="glasses" value="no">No</option>
                         </select></div>
@@ -107,38 +114,38 @@
                 <div class="col">
                     <div class="row">
                         <div class="spacer">Interested in<br>${currentUser.lookingfor_string}<br>Change selection below:<br>
-                            <input type="checkbox" name="lookingfor" value="male">Male</input>
-                            <input type="checkbox" name="lookingfor" value="female">Female</input>
-                            <input type="checkbox" name="lookingfor" value="transgender">Transgender</input>
-                            <input type="checkbox" name="lookingfor" value="transsexual">Transsexual</input>
-                            <input type="checkbox" name="lookingfor" value="non_binary">Non-Binary</input>
+                            <input type="checkbox" name="g1" value="1">Male</input>
+                            <input type="checkbox" name="g2" value="1">Female</input>
+                            <input type="checkbox" name="g3" value="1">Transgender</input>
+                            <input type="checkbox" name="g4" value="1">Transsexual</input>
+                            <input type="checkbox" name="g5" value="1">Non-Binary</input>
                         </div>
                     </div>
                     <div class="row">
                         <div class="spacer">Hobbies<br>${currentUser.hobbies_string}<br>Change selection below:<br>
-                            <input type="checkbox" name="hobbies" value="yoga">Yoga</input>
-                            <input type="checkbox" name="hobbies" value="music">Music</input>
-                            <input type="checkbox" name="hobbies" value="singing">Singing</input>
-                            <input type="checkbox" name="hobbies" value="dancing">Dancing</input><br>
-                            <input type="checkbox" name="hobbies" value="art">Art</input>
-                            <input type="checkbox" name="hobbies" value="hiking">Hiking</input>
-                            <input type="checkbox" name="hobbies" value="biking">Biking</input>
-                            <input type="checkbox" name="hobbies" value="swimming">Swimming</input><br>
-                            <input type="checkbox" name="hobbies" value="cooking">Cooking</input>
-                            <input type="checkbox" name="hobbies" value="gardening">Gardening</input>
-                            <input type="checkbox" name="hobbies" value="driving">Driving</input>
-                            <input type="checkbox" name="hobbies" value="comedy">Comedy</input><br>
-                            <input type="checkbox" name="hobbies" value="fighting">Fighting</input>
-                            <input type="checkbox" name="hobbies" value="philosophy">Philosophy</input>
-                            <input type="checkbox" name="hobbies" value="business">Business</input>
-                            <input type="checkbox" name="hobbies" value="investing">Investing</input>
+                            <input type="checkbox" name="h1" value="1">Yoga</input>
+                            <input type="checkbox" name="h2" value="1">Music</input>
+                            <input type="checkbox" name="h3" value="1">Singing</input>
+                            <input type="checkbox" name="h4" value="1">Dancing</input><br>
+                            <input type="checkbox" name="h5" value="1">Art</input>
+                            <input type="checkbox" name="h6" value="1">Hiking</input>
+                            <input type="checkbox" name="h7" value="1">Biking</input>
+                            <input type="checkbox" name="h8" value="1">Swimming</input><br>
+                            <input type="checkbox" name="h9" value="1">Cooking</input>
+                            <input type="checkbox" name="h10" value="1">Gardening</input>
+                            <input type="checkbox" name="h11" value="1">Driving</input>
+                            <input type="checkbox" name="h12" value="1">Comedy</input><br>
+                            <input type="checkbox" name="h13" value="1">Fighting</input>
+                            <input type="checkbox" name="h14" value="1">Philosophy</input>
+                            <input type="checkbox" name="h15" value="1">Business</input>
+                            <input type="checkbox" name="h16" value="1">Investing</input>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="spacer">Conversation Starters<br>
-                <textarea id="conversation_starters" class="form-control" rows="8">${currentUser.starters}</textarea>
+                <textarea id="conversation_starters" class="form-control" rows="8" value="starters">${currentUser.starters}</textarea>
                 </div>
             </div>
             <div class="row">
