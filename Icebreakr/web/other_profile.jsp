@@ -39,18 +39,18 @@
             <div class="col">
                 <div class="row">
                     <div class="col">
-                        <div class="spacer">Name: <span id="name" value="${profile.otherUser.name}"></span></div>
+                        <div class="spacer">Name: <span id="name" value="${otherUser.name}"></span></div>
                     </div>
                     <div class="col">
-                        <div class="spacer">Location: <span id="location" value="${profile.otherUser.location}"></span></div>
+                        <div class="spacer">Location: <span id="location" value="${otherUser.location}"></span></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="spacer">Age: <span id="age" value="${profile.otherUser.generateAge()}"></span></div>
+                        <div class="spacer">Age: <span id="age" value="${otherUser.generateAge()}"></span></div>
                     </div>
                     <div class="col">
-                        <div class="spacer">Gender: <span id="gender" value="${profile.otherUser.gender.toString()}"></span></div>
+                        <div class="spacer">Gender: <span id="gender" value="${otherUser.gender.toString()}"></span></div>
                     </div>
                 </div>                
             </div>
@@ -58,39 +58,39 @@
         <div class="row">
             <div class="col">
                 <div class="row">
-                    <div class="spacer">Height: <span id="height_feet" value="${profile.otherUser.heightFeet}"></span>ft. <span id="height_inches" value="${profile.otherUser.heightInches}"></span>in.</div>
+                    <div class="spacer">Height: <span id="height_feet" value="${otherUser.heightFeet}"></span>ft. <span id="height_inches" value="${otherUser.heightInches}"></span>in.</div>
                 </div>
                 <div class="row">
                     <div class="spacer">
-                        Hair: <span id="hair_color" value="${profile.otherUser.hairColor.toString()}"></span>
+                        Hair: <span id="hair_color" value="${otherUser.hairColor.toString()}"></span>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="spacer">Zodiac Sign: <span id="zodiac" value="${profile.otherUser.generateZodiac()}"></span></div>
+                    <div class="spacer">Zodiac Sign: <span id="zodiac" value="${otherUser.generateZodiac()}"></span></div>
                 </div>
                 <div class="row">
-                    <div class="spacer">Children: <span id="num_children" value="${profile.otherUser.children}"></span></div>
+                    <div class="spacer">Children: <span id="num_children" value="${otherUser.children}"></span></div>
                 </div>
                 <div class="row">
-                    <div class="spacer">Ethnicity: <span id="ethnicity" value="${profile.otherUser.ethnicity}"></span></div>
+                    <div class="spacer">Ethnicity: <span id="ethnicity" value="${otherUser.ethnicity}"></span></div>
                 </div>
                 <div class="row">
-                    <div class="spacer">Glasses: <span id="glasses" value="${profile.otherUser.wearsGlasses()}"></span></div>
+                    <div class="spacer">Glasses: <span id="glasses" value="${otherUser.wearsGlasses()}"></span></div>
                 </div>
             </div>
             <div class="col">
                 <div class="row">
                     <div class="spacer">Interested in<br>
-                        <span id="looking_for" value="${profile.otherUser.generateLookingFor()}"></span></div>
+                        <span id="looking_for" value="${otherUser.generateLookingFor()}"></span></div>
                 </div>
                 <div class="row">
                     <div class="spacer">Hobbies<br>
-                        <span id="hobbies" value="${profile.otherUser.generateHobbies()}"></span>
+                        <span id="hobbies" value="${otherUser.generateHobbies()}"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="spacer">Conversation Starters<br>
-                    <span id="conversation_starters" value="${profile.otherUser.starters}"></span>
+                    <span id="conversation_starters" value="${otherUser.starters}"></span>
                     </div>
                 </div>
             </div>
