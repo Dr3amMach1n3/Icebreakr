@@ -244,13 +244,14 @@ public class IcebreakrServlet extends HttpServlet {
      */
     private void loadPictures(Pictures pictures, String username, Connection connection){
         try {
-            String preparedSQL = "SELECT * FROM Photo WHERE username = ? ORDER BY position ASC";
-            PreparedStatement ps = connection.prepareStatement(preparedSQL);
-            ps.setString(1, username);
-            ResultSet results = ps.executeQuery();
+            for(int i = 1; i < 10; i++) {
+                String preparedSQL = "SELECT * FROM Photo WHERE username = ? AND position = ?";
+                PreparedStatement ps = connection.prepareStatement(preparedSQL);
+                ps.setString(1, username);
+                ps.setString(2, Integer.toString(i));
+                ResultSet results = ps.executeQuery();
             
-            //set all parameters in user to values in database
-            while(results.next()) {
+                //set all parameters in user to values in database
                 String url = results.getNString(2);
                 int pos = results.getInt(3);
                 switch(pos) {
@@ -272,15 +273,9 @@ public class IcebreakrServlet extends HttpServlet {
                         pictures.setPicture8(url);
                     case 9:
                         pictures.setPicture9(url);
-                    default:
-                        ArrayList<String> sample_pics = new ArrayList<>();
-                        for(int i = 0; i < 9; i++) {
-                            sample_pics.add("test.jpg");
-                        }
-                        pictures.setPictures(sample_pics);
                 }
-                pictures.updatePictureCount();
             }
+            pictures.updatePictureCount();
         } catch (SQLException ex) {
             Logger.getLogger(IcebreakrServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
