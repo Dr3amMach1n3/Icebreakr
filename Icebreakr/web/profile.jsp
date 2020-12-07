@@ -106,7 +106,7 @@
                     <div class="row">
                         <div class="spacer">Glasses: ${currentUser.glasses_string}<br>Change selection below:<br>
                             <select id="wears_glasses" name="glasses">
-                                    <option value="0">Yes</option>
+                                    <option value="1">Yes</option>
                                     <option value="1">No</option>
                         </select></div>
                     </div>
