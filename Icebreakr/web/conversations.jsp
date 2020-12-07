@@ -57,7 +57,8 @@
                     </form>
     		</a>
     		<div class="container secondary pt-3 pb-3 mb-4">
-                    <c:forEach var="message" begin = "0" end = "${messages.getLength()}">
+                    <c:if test = "${messages.getLength() > 0}">
+                    <c:forEach var="message" begin = "0" end = "${messages.getLength()-1}">
                         <c:choose>
                             <c:when test = "${messages.getSender(message) == conversations.getCurrentUsername()}">
                                 <div class="row">
@@ -81,6 +82,7 @@
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
+                    </c:if>
     		</div>
     		<div class="container">
     			<div class="row align-items-end">
