@@ -18,7 +18,7 @@
                  </form>
                  <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
                      <input type="hidden" name="action" value="conversation">
-                     <button class="btn my-2 my-sm-0" type="submit">Conversations</button
+                     <button class="btn my-2 my-sm-0" type="submit">Conversations</button>
                  </form>
                  <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
                      <input type="hidden" name="action" value="profile">
@@ -56,7 +56,10 @@
             </div>
         </div>
         <div>Pictures: <span id="picture_count">1</span></div>
-        <a href="pictures.html" >Manage Pictures</a>
+        <form action="IcebreakrServlet" method="post">
+            <input type="hidden" name="action" value="pictures">
+            <button class="btn text-primary font-weight-bold my-2 my-sm-0" type="submit">Manage Pictures</button>
+        </form>
         <form action="IcebreakrServlet" method="post">
             <input type="hidden" name="action" value="update_profile">
             <div class="row">
