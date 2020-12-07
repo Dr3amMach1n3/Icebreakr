@@ -576,7 +576,7 @@ public class IcebreakrServlet extends HttpServlet {
                 ResultSet result = statement.executeQuery("SELECT COUNT (username) FROM User");
                 int numUsers = result.getInt(1);
                 Random rand =  new Random();
-                result = statement.executeQuery("SELECT username FROM User ORDER BY username LIMIT 1 OFFSET " + rand.nextInt(numUsers));
+                result = statement.executeQuery("SELECT username FROM User ORDER BY username LIMIT 1 OFFSET " + (rand.nextInt(numUsers) + 1));
                 String username = result.getString("username");
                 loadPictures(otherPictures, username, dbConnection);
                 loadUser(otherUser, username, dbConnection);
