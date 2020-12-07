@@ -424,7 +424,7 @@ public class User implements Serializable{
             return_string = return_string.concat(g.toString());
             return_string = return_string.concat(", ");
         }
-        return_string = return_string.substring(0, return_string.length() - 3); //remove last ", "
+        return_string = return_string.substring(0, return_string.length() - 2); //remove last ", "
         return return_string;
     }
     
@@ -438,7 +438,7 @@ public class User implements Serializable{
             return_string = return_string.concat(h.toString());
             return_string = return_string.concat(", ");
         }
-        return_string = return_string.substring(0, return_string.length() - 3); //remove last ", "
+        return_string = return_string.substring(0, return_string.length() - 2); //remove last ", "
         return return_string;
     }
 }
