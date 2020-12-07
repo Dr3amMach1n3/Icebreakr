@@ -525,12 +525,14 @@ public class IcebreakrServlet extends HttpServlet {
                 Conversations conversations = new Conversations();
                 
                 while(resultA.next()) {
-                    conversations.addUsers(resultA.getString("userB"));
+                    loadUser(otherUser,resultA.getString("userB"), dbConnection);
+                    conversations.addUsers(otherUser);
                 }
                 while(resultB.next()) {
-                    conversations.addUsers(resultB.getString("userA"));
+                    loadUser(otherUser,resultA.getString("userB"), dbConnection);
+                    conversations.addUsers(otherUser);
                 }
-                conversations.sort();
+                //conversations.sort();
                
                 session.setAttribute("conversations", conversations);
                 
