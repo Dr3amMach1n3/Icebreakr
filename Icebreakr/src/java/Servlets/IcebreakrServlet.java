@@ -90,7 +90,6 @@ public class IcebreakrServlet extends HttpServlet {
             for(int i = 0; i < 5; i++) {
                 int bit = lookingfor & 1;
                 if(bit > 0) {
-                    l_lookingfor.add(Genders.values()[i]);
                     switch(i) {
                         case 0:
                             l_lookingfor.add(Genders.Male);
