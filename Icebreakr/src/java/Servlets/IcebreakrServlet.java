@@ -66,6 +66,7 @@ public class IcebreakrServlet extends HttpServlet {
             user.setName(results.getNString(3));
             user.setBirthday(results.getDate(4));
             user.setAge_string(Integer.toString(user.generateAge()));
+            user.setZodiac(user.generateZodiac());
             int gender = results.getInt(5);
             switch(gender) {
                 case 0:
