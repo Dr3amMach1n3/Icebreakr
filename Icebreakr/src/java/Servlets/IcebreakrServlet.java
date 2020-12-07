@@ -529,7 +529,7 @@ public class IcebreakrServlet extends HttpServlet {
                     conversations.addUsers(otherUser);
                 }
                 while(resultB.next()) {
-                    loadUser(otherUser,resultA.getString("userA"), dbConnection);
+                    loadUser(otherUser,resultB.getString("userA"), dbConnection);
                     conversations.addUsers(otherUser);
                 }
                 //conversations.sort();
