@@ -25,11 +25,13 @@
     	<div class="row">
         <div class="col-sm-3 border secondary text-center pl-0 pr-0">
             <c:forEach var="user" items="${conversations.users}">
-            <form action="" method="post">
-                <input type="hidden" name="action" value="messages">
-                <input type="hidden" name="target" value="${user}">
-                <input type="submit" value="${user}">
-            </form>
+            <a class="msgr btn btn-light text-center">
+                <form "msgr btn btn-light text-center" action="IcebreakrServlet" method="post">
+                    <input type="hidden" name="action" value="messages">
+                    <input type="hidden" name="target" value="${user}">
+                    <input type="submit" value="${user}">
+                </form>
+            </a>
             </c:forEach>
         </div>
         <div class="col-sm-9">
