@@ -47,10 +47,10 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="spacer">Age: <span id="age">${currentUser.generateAge()}</span></div>
+                        <div class="spacer">Age: <span id="age">${currentUser.age_string}</span></div>
                     </div>
                     <div class="col">
-                        <div class="spacer">Gender: <span id="gender">${currentUser.gender.toString()}</span></div>
+                        <div class="spacer">Gender: <span id="gender">${currentUser.gender_string}</span></div>
                     </div>
                 </div>                
             </div>
@@ -62,11 +62,12 @@
             <div class="row">
                 <div class="col">
                     <div class="row">
-                        <div class="spacer">Height: <input id="height_feet" type="number" min="0" max ="9" step="1" size="1"/>${currentUser.heightFeet} ft. <input id="height_inches" type="number" min="0" max ="11" step="1" size="1"/>${currentUser.heightInches} in.</div>
+                        <div class="spacer">Height: <input id="height_feet" type="number" min="0" max ="9" step="1" size="1" value="${currentUser.heightFeet}"/> ft. <input id="height_inches" type="number" min="0" max ="11" step="1" size="1" value="${currentUser.heightInches}"/> in.</div>
                     </div>
                     <div class="row">
                         <div class="spacer">
-                            Hair: <select id="hair_color">${currentUser.hairColor.toString()}
+                            Hair: <select id="hair_color">
+                                <option value="${currentUser.hairColor}">Currently ${currentUser.hairColor_string}</option>
                                 <option value="Brown">Brown</option>
                                 <option value="Bald">Bald</option>
                                 <option value="Blonde">Blonde</option>
@@ -87,16 +88,17 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="spacer">Zodiac Sign: <span id="zodiac">${currentUser.generateZodiac()}</span></div>
+                        <div class="spacer">Zodiac Sign: <span id="zodiac">${currentUser.zodiac}</span></div>
                     </div>
                     <div class="row">
-                        <div class="spacer">Children: <input id="num_children" type="number" min="0" max ="70" step="1" size="1"/>${currentUser.children}</div>
+                        <div class="spacer">Children: <input id="num_children" type="number" min="0" max ="70" step="1" size="1" value="${currentUser.children}"/></div>
                     </div>
                     <div class="row">
-                        <div class="spacer">Ethnicity: <input id="ethnicity" type="text"/>${currentUser.ethnicity}</div>
+                        <div class="spacer">Ethnicity: <input id="ethnicity" type="text" value="${currentUser.ethnicity}"/></div>
                     </div>
                     <div class="row">
-                        <div class="spacer">Glasses: <select id="glasses">${currentUser.wearsGlasses()}
+                        <div class="spacer">Glasses: <select id="glasses">
+                                    <option value="${currentUser.glasses}">Currently ${currentUser.glasses_string}</option>
                                     <option value="0">Yes</option>
                                     <option value="1">No</option>
                         </select></div>
