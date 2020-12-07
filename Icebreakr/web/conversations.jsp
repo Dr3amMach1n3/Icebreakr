@@ -60,7 +60,7 @@
                     <c:if test = "${messages.getLength() > 0}">
                     <c:forEach var="message" begin = "0" end = "${messages.getLength()-1}">
                         <c:choose>
-                            <c:when test = "${messages.getSender(message) == conversations.getCurrentUsername()}">
+                            <c:when test = "${messages.getSender(message).equals(conversations.getCurrentUsername())}">
                                 <div class="row">
                                     <div class="col-sm-6"></div>
                                     <div class="col-sm-6">
@@ -70,7 +70,7 @@
                                     </div>
                                 </div>
                                 </c:when>
-                                <c:when test = "${messages.getSender(message) != conversations.getCurrentUsername()}">
+                                <c:otherwise>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="container secondary pt-1 pb-1 mt-1 mb-1 border border-dark">
@@ -79,7 +79,7 @@
                                     </div>
                                     <div class="col-sm-6>"></div>
                                 </div>
-                            </c:when>
+                            </c:otherwise>
                         </c:choose>
                     </c:forEach>
                     </c:if>
