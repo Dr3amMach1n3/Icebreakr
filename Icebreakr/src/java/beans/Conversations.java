@@ -15,10 +15,19 @@ import java.util.Collections;
  */
 public class Conversations implements Serializable{
     
+    private String currentUsername;
     private ArrayList<User> users;
     
     public Conversations() {
         users = new ArrayList<User>();
+    }
+    
+    public void setCurrentUsername(String u) {
+        currentUsername = u;
+    }
+    
+    public String getCurrentUsername() {
+        return currentUsername;
     }
     
     public void addUsers(User u) {
