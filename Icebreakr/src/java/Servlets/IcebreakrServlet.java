@@ -235,6 +235,57 @@ public class IcebreakrServlet extends HttpServlet {
             Logger.getLogger(IcebreakrServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    /** Attempt to populate the specified picture collection with information from the database
+     * 
+     * @param pictures the picture collection to be updated
+     * @param username the corresponding user of the photos
+     * @param connection the current database connection
+     */
+    private void loadPictures(Pictures pictures, String username, Connection connection){
+        try {
+            String preparedSQL = "SELECT * FROM Photo WHERE username = ? ORDER BY position ASC";
+            PreparedStatement ps = connection.prepareStatement(preparedSQL);
+            ps.setString(1, username);
+            ResultSet results = ps.executeQuery();
+            
+            //set all parameters in user to values in database
+            while(results.next()) {
+                String url = results.getNString(2);
+                int pos = results.getInt(3);
+                switch(pos) {
+                    case 1:
+                        pictures.setPicture1(url);
+                    case 2:
+                        pictures.setPicture2(url);
+                    case 3:
+                        pictures.setPicture3(url);
+                    case 4:
+                        pictures.setPicture4(url);
+                    case 5:
+                        pictures.setPicture5(url);
+                    case 6:
+                        pictures.setPicture6(url);
+                    case 7:
+                        pictures.setPicture7(url);
+                    case 8:
+                        pictures.setPicture8(url);
+                    case 9:
+                        pictures.setPicture9(url);
+                    default:
+                        ArrayList<String> sample_pics = new ArrayList<>();
+                        for(int i = 0; i < 9; i++) {
+                            sample_pics.add("test.jpg");
+                        }
+                        pictures.setPictures(sample_pics);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(IcebreakrServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            System.out.println("ERROR: " + ex);
+        }
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -618,30 +669,102 @@ public class IcebreakrServlet extends HttpServlet {
                     statement.close();
                 }
                 url = "/conversations.jsp";
+            /* code for when a user wants to manage their photos */
             }else if(action.equals("pictures")){
-                Statement statement = dbConnection.createStatement();
-                ResultSet result = statement.executeQuery("SELECT * FROM Photo WHERE username='" + currentUser.getUsername() + "' ORDER BY position ASC");
-                
-                Pictures pictures = new Pictures();
-                pictures.pad();
-                
-                while(result.next()) {
-                    String source = result.getString("source");
-                    int pos = Integer.parseInt(request.getParameter("position"));
-                    pictures.addPicture(pos,source);
-                }
-                try {
-                    String new_url = request.getParameter("url");
-                    int pos = Integer.parseInt(request.getParameter("pos"));
-                    pictures.addPicture(pos,new_url);
-                    statement.executeQuery("DELETE FROM Picture WHERE username='" + currentUser.getUsername() + "' AND position='" + String.valueOf(pos) + "'");
-                    statement.executeQuery("INSERT INTO Picture (username, source, position) VALUES ('" + currentUser.getUsername() + "', '" + new_url + "', '" + String.valueOf(pos) + "')");
-                } catch(Exception e) { }
-                
-                session.setAttribute("pictures", pictures);
+                String username = request.getParameter("username");
+                loadPictures(currentPictures, username, dbConnection);
                 url = "pictures.jsp";
+            /* code for when a user wants to submit changes to their photos */
+            }else if(action.equals("update_pictures")){
+                /* get the updated info */
+                String username = currentUser.getUsername();
+                String url1 = currentPictures.getPicture1();
+                if(url1 == null || url1.equals("")) {
+                    url1 = "test.jpg";
+                }
+                String url2 = currentPictures.getPicture2();
+                if(url2 == null || url2.equals("")) {
+                    url2 = "test.jpg";
+                }
+                String url3 = currentPictures.getPicture3();
+                if(url3 == null || url3.equals("")) {
+                    url3 = "test.jpg";
+                }
+                String url4 = currentPictures.getPicture4();
+                if(url4 == null || url4.equals("")) {
+                    url4 = "test.jpg";
+                }
+                String url5 = currentPictures.getPicture5();
+                if(url5 == null || url5.equals("")) {
+                    url5 = "test.jpg";
+                }
+                String url6 = currentPictures.getPicture6();
+                if(url6 == null || url6.equals("")) {
+                    url6 = "test.jpg";
+                }
+                String url7 = currentPictures.getPicture7();
+                if(url7 == null || url7.equals("")) {
+                    url7 = "test.jpg";
+                }
+                String url8 = currentPictures.getPicture8();
+                if(url8 == null || url8.equals("")) {
+                    url8 = "test.jpg";
+                }
+                String url9 = currentPictures.getPicture9();
+                if(url9 == null || url9.equals("")) {
+                    url9 = "test.jpg";
+                }
+                
+                /* attempt to insert the new data into the database */
+                PreparedStatement statement = dbConnection.prepareStatement("UPDATE Photo SET source=? WHERE Photo.username=? AND Photo.position=1");
+                statement.setString(1, url1);
+                statement.setString(2, username);
+                statement.executeUpdate();
+                
+                statement = dbConnection.prepareStatement("UPDATE Photo SET source=? WHERE Photo.username=? AND Photo.position=2");
+                statement.setString(1, url2);
+                statement.setString(2, username);
+                statement.executeUpdate();
+                
+                statement = dbConnection.prepareStatement("UPDATE Photo SET source=? WHERE Photo.username=? AND Photo.position=3");
+                statement.setString(1, url3);
+                statement.setString(2, username);
+                statement.executeUpdate();
+                
+                statement = dbConnection.prepareStatement("UPDATE Photo SET source=? WHERE Photo.username=? AND Photo.position=4");
+                statement.setString(1, url4);
+                statement.setString(2, username);
+                statement.executeUpdate();
+                
+                statement = dbConnection.prepareStatement("UPDATE Photo SET source=? WHERE Photo.username=? AND Photo.position=5");
+                statement.setString(1, url5);
+                statement.setString(2, username);
+                statement.executeUpdate();
+                
+                statement = dbConnection.prepareStatement("UPDATE Photo SET source=? WHERE Photo.username=? AND Photo.position=6");
+                statement.setString(1, url6);
+                statement.setString(2, username);
+                statement.executeUpdate();
+                
+                statement = dbConnection.prepareStatement("UPDATE Photo SET source=? WHERE Photo.username=? AND Photo.position=7");
+                statement.setString(1, url7);
+                statement.setString(2, username);
+                statement.executeUpdate();
+                
+                statement = dbConnection.prepareStatement("UPDATE Photo SET source=? WHERE Photo.username=? AND Photo.position=8");
+                statement.setString(1, url8);
+                statement.setString(2, username);
+                statement.executeUpdate();
+                
+                statement = dbConnection.prepareStatement("UPDATE Photo SET source=? WHERE Photo.username=? AND Photo.position=9");
+                statement.setString(1, url9);
+                statement.setString(2, username);
+                statement.executeUpdate();
+                
+                loadUser(currentUser, username, dbConnection); //load the updated profile
+                url = "profile.jsp";
+                
                 statement.close();
-                result.close();
             }
             dbConnection.close();
             RequestDispatcher dispatcher = request.getRequestDispatcher(url);
