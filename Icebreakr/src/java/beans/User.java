@@ -337,73 +337,73 @@ public class User implements Serializable{
         int day = bday.get(Calendar.DAY_OF_MONTH);
         
         switch(month) {
-            case 1:
+            case 0:
                 if(day < 20) {
                     return "Capricorn";
                 } else {
                     return "Aquarius";
                 }
-            case 2:
+            case 1:
                 if(day < 19) {
                     return "Aquarius";
                 } else {
                     return "Pisces";
                 }
-            case 3:
+            case 2:
                 if(day < 21) {
                     return "Pisces";
                 } else {
                     return "Aries";
                 }
-            case 4:
+            case 3:
                 if(day < 20) {
                     return "Aries";
                 } else {
                     return "Taurus";
                 }
-            case 5:
+            case 4:
                 if(day < 21) {
                     return "Taurus";
                 } else {
                     return "Gemini";
                 }
-            case 6:
+            case 5:
                 if(day < 21) {
                     return "Gemini";
                 } else {
                     return "Cancer";
                 }
-            case 7:
+            case 6:
                 if(day < 23) {
                     return "Cancer";
                 } else {
                     return "Leo";
                 }
-            case 8:
+            case 7:
                 if(day < 23) {
                     return "Leo";
                 } else {
                     return "Virgo";
                 }
-            case 9:
+            case 8:
                 if(day < 23) {
                     return "Virgo";
                 } else {
                     return "Libra";
                 }
-            case 10:
+            case 9:
                 if(day < 23) {
                     return "Libra";
                 } else {
                     return "Scorpio";
                 }
-            case 11:
+            case 10:
                 if(day < 22) {
                     return "Scorpio";
                 } else {
                     return "Sagittarius";
                 }
-            case 12:
+            case 11:
                 if(day < 22) {
                     return "Sagittarius";
                 } else {
