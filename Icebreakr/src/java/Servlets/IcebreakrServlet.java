@@ -560,9 +560,8 @@ public class IcebreakrServlet extends HttpServlet {
                 String other = request.getParameter("target");
                 
                 Statement statement = dbConnection.createStatement();
-                ResultSet result = statement.executeQuery("SELECT * FROM Message WHERE (sender='" + currentUser.getUsername() + "' AND receiver='" + other
-                        + "') OR (receiver='" + currentUser.getUsername()
-                        + "' AND sender='" + other + "') ORDER BY time ASC");
+                ResultSet result = statement.executeQuery("SELECT * FROM Message WHERE (sender='" + currentUser.getUsername() + "' OR receiver='" + currentUser.getUsername()
+                        + "') AND (receiver='" + other + "' OR sender='" + other + "') ORDER BY time ASC");
                 
                 Messages messages = new Messages();
                 
@@ -580,14 +579,16 @@ public class IcebreakrServlet extends HttpServlet {
                 result.close();
             }else if(action.equals("sendMessage")){
                 String text = request.getParameter("text");
-                String target = request.getParameter("target");
+                if (!text.isEmpty()) {
+                    String target = request.getParameter("target");
                 
-                Statement statement = dbConnection.createStatement();
-                
-                statement.executeQuery("INSERT INTO Message (receiver, sender, content) VALUES ('" + target + "', '" + currentUser.getUsername() + "', '" + text + "')");
-                
+                    Statement statement = dbConnection.createStatement();
+
+                    statement.executeQuery("INSERT INTO Message (receiver, sender, content) VALUES ('" + target + "', '" + currentUser.getUsername() + "', '" + text + "')");
+
+                    statement.close();
+                }
                 url = "/conversations.jsp";
-                statement.close();
             }else if(action.equals("pictures")){
                 Statement statement = dbConnection.createStatement();
                 ResultSet result = statement.executeQuery("SELECT * FROM Photo WHERE username='" + currentUser.getUsername() + "' ORDER BY position ASC");
