@@ -15,7 +15,7 @@ import java.util.Collections;
  */
 public class Conversations implements Serializable{
     
-    private ArrayList<String> users;
+    public ArrayList<String> users;
     
     public Conversations() {
         users = new ArrayList<String>();
