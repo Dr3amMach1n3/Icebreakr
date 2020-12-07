@@ -475,6 +475,7 @@ public class IcebreakrServlet extends HttpServlet {
                             statement.setString(3, Integer.toString(i));
                             statement.executeUpdate();
                         }
+                        loadPictures(currentPictures, username, dbConnection);
                         
                         url = "profile.jsp";
                     }else{
