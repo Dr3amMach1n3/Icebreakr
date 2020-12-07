@@ -318,10 +318,20 @@ public class IcebreakrServlet extends HttpServlet {
                 currentUser = new User();
                 session.setAttribute("currentUser", currentUser);
             }
+            Pictures currentPictures = (Pictures) session.getAttribute("currentPictures");
+            if(currentPictures == null){
+                currentPictures = new Pictures();
+                session.setAttribute("currentPictures", currentPictures);
+            }
             User otherUser = (User) session.getAttribute("otherUser");
             if(otherUser == null){
                 otherUser = new User();
                 session.setAttribute("otherUser", otherUser);
+            }
+            Pictures otherPictures = (Pictures) session.getAttribute("otherPictures");
+            if(otherPictures == null){
+                otherPictures = new Pictures();
+                session.setAttribute("otherPictures", otherPictures);
             }
             
             if(action == null){
@@ -405,6 +415,15 @@ public class IcebreakrServlet extends HttpServlet {
                         statement.setString(9, starters);
                         statement.executeUpdate();
                         loadUser(currentUser, username, dbConnection);
+                        
+                        for(int i = 1; i < 10; i++){
+                            statement = dbConnection.prepareStatement("INSERT INTO Photo (username, source, position) VALUES (?, ?, ?)");
+                            statement.setString(1, username);
+                            statement.setString(2, "test.jpg");
+                            statement.setString(3, Integer.toString(i));
+                            statement.executeUpdate();
+                        }
+                        
                         url = "profile.jsp";
                     }else{
                         credErr.setEmptyErr(true);
