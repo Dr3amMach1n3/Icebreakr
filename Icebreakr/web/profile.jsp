@@ -136,7 +136,7 @@
                     </div>
                     <div class="row">
                         <div class="spacer">Conversation Starters<br>
-                        <textarea id="conversation_starters" class="form-control" rows="8">${profile.currentUser.starters}</textarea>
+                        <textarea id="conversation_starters" class="form-control" rows="8">${currentUser.starters}</textarea>
                         </div>
                     </div>
                 </div>
