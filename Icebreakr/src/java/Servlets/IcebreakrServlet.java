@@ -456,7 +456,7 @@ public class IcebreakrServlet extends HttpServlet {
                 String glasses = request.getParameter("glasses");
                 
                 /* attempt to insert the new data into the database */
-                PreparedStatement statement = dbConnection.prepareStatement("INSERT INTO User (gender, lookingfor, location, hobbies, starters, height, haircolor, children, weight, ethnicity, glasses) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+                PreparedStatement statement = dbConnection.prepareStatement("INSERT INTO User (gender, lookingfor, location, hobbies, starters, height, haircolor, children, weight, ethnicity, glasses) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
                 statement.setString(1, gender);
                 statement.setString(2, lookingfor);
                 statement.setString(3, location);
