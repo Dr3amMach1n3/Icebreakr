@@ -568,7 +568,7 @@ public class IcebreakrServlet extends HttpServlet {
                 
                 Statement statement = dbConnection.createStatement();
                 
-                statement.executeQuery("INSERT INTO Message (receiver, sender, content) VALUES ('" + target + "', '" + currentUser.getUsername() + "', " + text + ")");
+                statement.executeQuery("INSERT INTO Message (receiver, sender, content) VALUES ('" + target + "', '" + currentUser.getUsername() + "', '" + text + "')");
                 
                 url = "/conversations.jsp";
                 statement.close();
