@@ -279,7 +279,7 @@ public class IcebreakrServlet extends HttpServlet {
                         }
                         pictures.setPictures(sample_pics);
                 }
-                pictures.setPictureCount();
+                pictures.updatePictureCount();
             }
         } catch (SQLException ex) {
             Logger.getLogger(IcebreakrServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -593,6 +593,7 @@ public class IcebreakrServlet extends HttpServlet {
                 }
                 String nextUser = swipeQueue.peekUser(username, dbConnection);
                 if(nextUser != null){
+                    loadPictures(otherPictures, nextUser, dbConnection);
                     loadUser(otherUser, nextUser, dbConnection);
                 }else{
                     otherUser.clear();
@@ -618,6 +619,7 @@ public class IcebreakrServlet extends HttpServlet {
                 
                 nextUser = swipeQueue.peekUser(username, dbConnection);
                 if(nextUser != null){
+                    loadPictures(otherPictures, nextUser, dbConnection);
                     loadUser(otherUser, nextUser, dbConnection);
                 }else{
                     otherUser.clear();
@@ -632,11 +634,13 @@ public class IcebreakrServlet extends HttpServlet {
                 
                 conversations.setCurrentUsername(currentUser.getUsername());
                 while(resultA.next()) {
+                    loadPictures(otherPictures,resultA.getString("userB"), dbConnection);
                     loadUser(otherUser,resultA.getString("userB"), dbConnection);
                     conversations.addUsers(otherUser);
                 }
                 while(resultB.next()) {
                     loadUser(otherUser,resultB.getString("userA"), dbConnection);
+                    loadPictures(otherPictures,resultB.getString("userA"), dbConnection);
                     conversations.addUsers(otherUser);
                 }
                 //conversations.sort();
@@ -649,6 +653,7 @@ public class IcebreakrServlet extends HttpServlet {
                 resultB.close();
             }else if(action.equals("messages")){
                 String other = request.getParameter("target");
+                loadPictures(otherPictures, other, dbConnection);
                 loadUser(otherUser,other,dbConnection);
                 
                 Statement statement = dbConnection.createStatement();
