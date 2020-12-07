@@ -39,18 +39,18 @@
             <div class="col">
                 <div class="row">
                     <div class="col">
-                        <div class="spacer">Name: <span id="name" value="${otherUser.name}"></span></div>
+                        <div class="spacer">Name: ${otherUser.name}</div>
                     </div>
                     <div class="col">
-                        <div class="spacer">Location: <span id="location" value="${otherUser.location}"></span></div>
+                        <div class="spacer">Location: ${otherUser.location}</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="spacer">Age: <span id="age" value="${otherUser.generateAge()}"></span></div>
+                        <div class="spacer">Age: ${otherUser.age_string}</div>
                     </div>
                     <div class="col">
-                        <div class="spacer">Gender: <span id="gender" value="${otherUser.gender.toString()}"></span></div>
+                        <div class="spacer">Gender: ${otherUser.gender_string}</div>
                     </div>
                 </div>                
             </div>
@@ -58,40 +58,33 @@
         <div class="row">
             <div class="col">
                 <div class="row">
-                    <div class="spacer">Height: <span id="height_feet" value="${otherUser.heightFeet}"></span>ft. <span id="height_inches" value="${otherUser.heightInches}"></span>in.</div>
+                    <div class="spacer">Height: ${otherUser.heightFeet} ft. ${otherUser.heightInches} in.</div>
                 </div>
                 <div class="row">
-                    <div class="spacer">
-                        Hair: <span id="hair_color" value="${otherUser.hairColor.toString()}"></span>
-                    </div>
+                    <div class="spacer">Hair: ${otherUser.hairColor_string}"</div>
                 </div>
                 <div class="row">
-                    <div class="spacer">Zodiac Sign: <span id="zodiac" value="${otherUser.generateZodiac()}"></span></div>
+                    <div class="spacer">Zodiac Sign: ${otherUser.zodiac}</div>
                 </div>
                 <div class="row">
-                    <div class="spacer">Children: <span id="num_children" value="${otherUser.children}"></span></div>
+                    <div class="spacer">Children: ${otherUser.children}</div>
                 </div>
                 <div class="row">
-                    <div class="spacer">Ethnicity: <span id="ethnicity" value="${otherUser.ethnicity}"></span></div>
+                    <div class="spacer">Ethnicity: ${otherUser.ethnicity}</div>
                 </div>
                 <div class="row">
-                    <div class="spacer">Glasses: <span id="glasses" value="${otherUser.wearsGlasses()}"></span></div>
+                    <div class="spacer">Glasses: ${otherUser.glasses_string}</div>
                 </div>
             </div>
             <div class="col">
                 <div class="row">
-                    <div class="spacer">Interested in<br>
-                        <span id="looking_for" value="${otherUser.generateLookingFor()}"></span></div>
+                    <div class="spacer">Interested in<br>${otherUser.lookingfor_string}"</div>
                 </div>
                 <div class="row">
-                    <div class="spacer">Hobbies<br>
-                        <span id="hobbies" value="${otherUser.generateHobbies()}"></span>
-                    </div>
+                    <div class="spacer">Hobbies<br>${otherUser.hobbies_string}</div>
                 </div>
                 <div class="row">
-                    <div class="spacer">Conversation Starters<br>
-                    <span id="conversation_starters" value="${otherUser.starters}"></span>
-                    </div>
+                    <div class="spacer">Conversation Starters<br>${otherUser.starters}</div>
                 </div>
             </div>
         </div>
