@@ -75,7 +75,7 @@
                                             <option name="gender" value="0">Male</option>
                                             <option name="gender" value="1">Female</option>
                                             <option name="gender" value="2">Transgender</option>
-                                            <option name="gender" value="3">Transexual</option>
+                                            <option name="gender" value="3">Transsexual</option>
                                             <option name="gender" value="4">Non-Binary</option>
                                 </select>
                             </div>
@@ -89,7 +89,7 @@
                             <input type="checkbox" name="g0" value="1">Male </input>
                             <input type="checkbox" name="g1" value="1">Female </input>
                             <input type="checkbox" name="g2" value="1">Transgender </input>
-                            <input type="checkbox" name="g3" value="1">Transexual </input>
+                            <input type="checkbox" name="g3" value="1">Transsexual </input>
                             <input type="checkbox" name="g4" value="1">Non-Binary </input>
                         </div>
                     </div>
