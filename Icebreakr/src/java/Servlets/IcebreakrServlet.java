@@ -587,7 +587,7 @@ public class IcebreakrServlet extends HttpServlet {
                     int pos = Integer.parseInt(request.getParameter("pos"));
                     pictures.addPicture(pos,new_url);
                     statement.executeQuery("DELETE FROM Picture WHERE username='" + currentUser.getUsername() + "' AND position='" + String.valueOf(pos) + "'");
-                    statement.executeQuery("INSERT INTO Picture (username, source, position) VALUES (" + currentUser.getUsername() + ", " + new_url + ", " + String.valueOf(pos));
+                    statement.executeQuery("INSERT INTO Picture (username, source, position) VALUES ('" + currentUser.getUsername() + "', '" + new_url + "', '" + String.valueOf(pos) + "')");
                 } catch(Exception e) { }
                 
                 session.setAttribute("pictures", pictures);
