@@ -91,14 +91,12 @@ public class Pictures implements Serializable{
         this.pictures.set(9, url);
     }
     
-    public void setPictureCount() {
-        int count = 0;
-        for(String pict : pictures) {
-            if(!(pict.equals("test.jpg"))) {
-                count++;
-            }
+    public void setPictureCount(int i) {
+        if(i < 0 || i > 9) {
+            this.pictureCount = 0;
+        } else {
+            this.pictureCount = i;
         }
-        this.pictureCount = count;
     }
     
     public String getPicture1() {
@@ -138,8 +136,17 @@ public class Pictures implements Serializable{
     }
     
     public int getPictureCount() {
-        this.setPictureCount();
-        return pictureCount;
+        return this.pictureCount;
+    }
+    
+    public void updatePictureCount() {
+        int count = 0;
+        for(String pict : pictures) {
+            if(!pict.equals("test.jpg")) {
+                count++;
+            }
+        }
+        this.pictureCount = count;
     }
 
     public void addPicture(String url) {
