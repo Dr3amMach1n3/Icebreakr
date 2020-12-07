@@ -56,4 +56,8 @@ public class Messages implements Serializable{
     public String getContent(int i) {
         return content.get(i);
     }
+    
+    public int getLength() {
+        return content.size();
+    }
 }
