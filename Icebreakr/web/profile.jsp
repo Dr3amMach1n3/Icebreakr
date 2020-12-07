@@ -106,32 +106,32 @@
                 </div>
                 <div class="col">
                     <div class="row">
-                        <div class="spacer">Interested in<br>
-                            <input type="checkbox" name="g0" value="1">Male</input>
-                            <input type="checkbox" name="g1" value="1">Female</input>
-                            <input type="checkbox" name="g2" value="1">Transgender</input>
-                            <input type="checkbox" name="g3" value="1">Transsexual</input>
-                            <input type="checkbox" name="g4" value="1">Non-Binary</input>
+                        <div class="spacer">Interested in<br>${currentUser.lookingfor_string}<br>Change selection below:<br>
+                            <input type="checkbox" name="lookingfor" value="male">Male</input>
+                            <input type="checkbox" name="lookingfor" value="female">Female</input>
+                            <input type="checkbox" name="lookingfor" value="transgender">Transgender</input>
+                            <input type="checkbox" name="lookingfor" value="transsexual">Transsexual</input>
+                            <input type="checkbox" name="lookingfor" value="non_binary">Non-Binary</input>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="spacer">Hobbies<br>
-                            <input type="checkbox" name="h0" value="1">Yoga </input>
-                            <input type="checkbox" name="h1" value="1">Musician </input>
-                            <input type="checkbox" name="h2" value="1">Singing </input>
-                            <input type="checkbox" name="h3" value="1">Dancing </input>
-                            <input type="checkbox" name="h4" value="1">Art </input>
-                            <input type="checkbox" name="h5" value="1">Hiking </input>
-                            <input type="checkbox" name="h6" value="1">Biking </input>
-                            <input type="checkbox" name="h7" value="1">Swimming </input>
-                            <input type="checkbox" name="h8" value="1">Cooking </input>
-                            <input type="checkbox" name="h9" value="1">Gardening </input>
-                            <input type="checkbox" name="h10" value="1">Driving </input>
-                            <input type="checkbox" name="h11" value="1">Comedy </input>
-                            <input type="checkbox" name="h12" value="1">Fighting </input>
-                            <input type="checkbox" name="h13" value="1">Philosophy </input>
-                            <input type="checkbox" name="h14" value="1">Business </input>
-                            <input type="checkbox" name="h15" value="1">Investing </input>
+                        <div class="spacer">Hobbies<br>${currentUser.hobbies_string}<br>Change selection below:<br>
+                            <input type="checkbox" name="hobbies" value="yoga">Yoga</input>
+                            <input type="checkbox" name="hobbies" value="music">Music</input>
+                            <input type="checkbox" name="hobbies" value="singing">Singing</input>
+                            <input type="checkbox" name="hobbies" value="dancing">Dancing</input><br>
+                            <input type="checkbox" name="hobbies" value="art">Art</input>
+                            <input type="checkbox" name="hobbies" value="hiking">Hiking</input>
+                            <input type="checkbox" name="hobbies" value="biking">Biking</input>
+                            <input type="checkbox" name="hobbies" value="swimming">Swimming</input><br>
+                            <input type="checkbox" name="hobbies" value="cooking">Cooking</input>
+                            <input type="checkbox" name="hobbies" value="gardening">Gardening</input>
+                            <input type="checkbox" name="hobbies" value="driving">Driving</input>
+                            <input type="checkbox" name="hobbies" value="comedy">Comedy</input><br>
+                            <input type="checkbox" name="hobbies" value="fighting">Fighting</input>
+                            <input type="checkbox" name="hobbies" value="philosophy">Philosophy</input>
+                            <input type="checkbox" name="hobbies" value="business">Business</input>
+                            <input type="checkbox" name="hobbies" value="investing">Investing</input>
                         </div>
                     </div>
                     <div class="row">
@@ -142,7 +142,7 @@
                 </div>
             </div>
             <div class="row">
-                <input type="submit" value="Update Profile">
+                <input type="submit" value="update_profile">
             </div>
         </form>
     </div>
