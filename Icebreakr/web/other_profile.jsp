@@ -34,7 +34,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <div class="spacer_picture"><img src="El_Guapo.jpg"></div>
+                <div class="spacer_picture"><img src="${otherPictures.picture1}"></div>
             </div>
             <div class="col">
                 <div class="row">
