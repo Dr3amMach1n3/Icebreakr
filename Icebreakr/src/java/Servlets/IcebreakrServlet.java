@@ -421,6 +421,11 @@ public class IcebreakrServlet extends HttpServlet {
                 }
                 statement.close();
                 result.close();
+            /* code for when a logged-in user wants to return to their profile */
+            }else if(action.equals("profile")){
+                String username = request.getParameter("username");
+                loadUser(currentUser, username, dbConnection);
+                url = "profile.jsp";
             /* code for when a user updates their profile */
             }else if(action.equals("update_profile")){
                 /* get the updated info */
@@ -430,7 +435,20 @@ public class IcebreakrServlet extends HttpServlet {
                 String location = request.getParameter("location");
                 String hobbies = getBitString(request, numHobbies, hobbyPrefix);
                 String starters = request.getParameter("starters");
-                String height = Integer.toString((12 * Integer.parseInt(request.getParameter("height_feet"))) + Integer.parseInt(request.getParameter("height_inches")));
+                String height = "0";
+                if(request.getParameter("height_feet") != null && request.getParameter("height_inches") != null) {
+                    try {
+                        int hf = Integer.parseInt(request.getParameter("height_feet"));
+                        int hi = Integer.parseInt(request.getParameter("height_inches"));
+                        if(hf < 1 || hf > 9 || hi < 0 || hi > 11) {
+                            height = "0";
+                        } else {
+                            height = Integer.toString((12 * hf) + hi);
+                        }
+                    } catch(Exception e) {
+                        height = "0";
+                    }
+                }
                 String haircolor = request.getParameter("hair_color");
                 String children = request.getParameter("children");
                 String weight = request.getParameter("weight");
