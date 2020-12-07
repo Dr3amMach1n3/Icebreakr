@@ -15,7 +15,7 @@ import java.util.Collections;
  */
 public class Conversations implements Serializable{
     
-    public ArrayList<String> users;
+    private ArrayList<String> users;
     
     public Conversations() {
         users = new ArrayList<String>();
@@ -32,8 +32,12 @@ public class Conversations implements Serializable{
     public void sort() {
         Collections.sort(users);
     }
+    
+    public ArrayList<String> getUsers() {
+        return users;
+    }
 
-    public String getUsers(int i) {
+    public String getUser(int i) {
         return users.get(i);
     }
 }
