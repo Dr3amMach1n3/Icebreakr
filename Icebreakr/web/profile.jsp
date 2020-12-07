@@ -39,18 +39,18 @@
             <div class="col">
                 <div class="row">
                     <div class="col">
-                        <div class="spacer">Name: <span id="name" value="${currentUser.name}"></span></div>
+                        <div class="spacer">Name: <span id="name">${currentUser.name}</span></div>
                     </div>
                     <div class="col">
-                        <div class="spacer">Location: <span id="location" value="${currentUser.location}"></span></div>
+                        <div class="spacer">Location: <span id="location">${currentUser.location}</span></div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <div class="spacer">Age: <span id="age" value="${currentUser.generateAge()}"></span></div>
+                        <div class="spacer">Age: <span id="age">${currentUser.generateAge()}</span></div>
                     </div>
                     <div class="col">
-                        <div class="spacer">Gender: <span id="gender" value="${currentUser.gender.toString()}"></span></div>
+                        <div class="spacer">Gender: <span id="gender">${currentUser.gender.toString()}</span></div>
                     </div>
                 </div>                
             </div>
@@ -62,11 +62,11 @@
             <div class="row">
                 <div class="col">
                     <div class="row">
-                        <div class="spacer">Height: <input id="height_feet" type="number" min="2" max ="9" step="1" size="1" value="${currentUser.heightFeet}"/>ft. <input id="height_inches" type="number" min="0" max ="11" step="1" size="1" value="${currentUser.heightInches}"/>in.</div>
+                        <div class="spacer">Height: <input id="height_feet" type="number" min="0" max ="9" step="1" size="1"/>${currentUser.heightFeet} ft. <input id="height_inches" type="number" min="0" max ="11" step="1" size="1"/>${currentUser.heightInches} in.</div>
                     </div>
                     <div class="row">
                         <div class="spacer">
-                            Hair: <select id="hair_color" value="${currentUser.hairColor.toString()}">
+                            Hair: <select id="hair_color">${currentUser.hairColor.toString()}
                                 <option value="Brown">Brown</option>
                                 <option value="Bald">Bald</option>
                                 <option value="Blonde">Blonde</option>
@@ -87,16 +87,16 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="spacer">Zodiac Sign: <span id="zodiac" value="${currentUser.generateZodiac()}"></span></div>
+                        <div class="spacer">Zodiac Sign: <span id="zodiac">${currentUser.generateZodiac()}</span></div>
                     </div>
                     <div class="row">
-                        <div class="spacer">Children: <input id="num_children" type="number" min="0" max ="70" step="1" size="1" value="${currentUser.children}"/></div>
+                        <div class="spacer">Children: <input id="num_children" type="number" min="0" max ="70" step="1" size="1"/>${currentUser.children}</div>
                     </div>
                     <div class="row">
-                        <div class="spacer">Ethnicity: <input id="ethnicity" type="text" value="${currentUser.ethnicity}"/></div>
+                        <div class="spacer">Ethnicity: <input id="ethnicity" type="text"/>${currentUser.ethnicity}</div>
                     </div>
                     <div class="row">
-                        <div class="spacer">Glasses: <select id="glasses" value="${currentUser.wearsGlasses()}">
+                        <div class="spacer">Glasses: <select id="glasses">${currentUser.wearsGlasses()}
                                     <option value="0">Yes</option>
                                     <option value="1">No</option>
                         </select></div>
@@ -134,7 +134,7 @@
                     </div>
                     <div class="row">
                         <div class="spacer">Conversation Starters<br>
-                        <textarea id="conversation_starters" class="form-control" rows="8" value="${profile.currentUser.starters}"></textarea>
+                        <textarea id="conversation_starters" class="form-control" rows="8">${profile.currentUser.starters}</textarea>
                         </div>
                     </div>
                 </div>
