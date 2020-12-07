@@ -542,6 +542,7 @@ public class IcebreakrServlet extends HttpServlet {
                 
                 Conversations conversations = new Conversations();
                 
+                conversations.setCurrentUsername(currentUser.getUsername());
                 while(resultA.next()) {
                     loadUser(otherUser,resultA.getString("userB"), dbConnection);
                     conversations.addUsers(otherUser);
