@@ -406,6 +406,7 @@ public class IcebreakrServlet extends HttpServlet {
                     credErr.setPassErr(true);
                     url = "index.jsp";
                 }else{
+                    loadPictures(currentPictures, username, dbConnection);
                     loadUser(currentUser, username, dbConnection);
                     url = "profile.jsp";
                 }
