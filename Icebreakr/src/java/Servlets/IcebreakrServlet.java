@@ -6,6 +6,9 @@
 package Servlets;
 
 import beans.*;
+import beans.User.Genders;
+import beans.User.HairColors;
+import beans.User.Hobbies;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
