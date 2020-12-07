@@ -99,8 +99,8 @@
                     <div class="row">
                         <div class="spacer">Glasses: <select id="glasses">
                                     <option value="${currentUser.glasses}">Currently ${currentUser.glasses_string}</option>
-                                    <option value="0">Yes</option>
-                                    <option value="1">No</option>
+                                    <option name="glasses" value="yes">Yes</option>
+                                    <option name="glasses" value="no">No</option>
                         </select></div>
                     </div>
                 </div>
