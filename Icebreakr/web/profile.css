@@ -27,7 +27,8 @@
 
 .spacer_pict {
     margin: 6px;
-	max-width:40%;
+    width:500px;
+    height:auto;
 }
 
 .pict_inst {
