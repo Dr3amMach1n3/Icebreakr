@@ -14,11 +14,25 @@
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom box-shadow">
         <h5 class="my-0 mr-md-auto">Icebreakr</h5>
         <nav class="my-2 my-md-0 mr-md-3">
-            <a class="p-2 text-dark font-weight-bold" href="match.html">Start Matching!</a>
-            <a class="p-2 text-dark" href="#">Conversations</a>
-            <a class="p-2 text-dark" href="profile.html">My Profile</a>
-        </nav> 
-        <a class="btn btn-outline-primary" href="index.html">Logout</a>
+             <div class="btn-group">
+                 <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
+                     <input type="hidden" name="action" value="match">
+                     <button class="btn text-dark font-weight-bold my-2 my-sm-0" type="submit">Start Matching!</button>
+                 </form>
+                 <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
+                     <input type="hidden" name="action" value="conversation">
+                     <button class="btn my-2 my-sm-0" type="submit">Conversations</button
+                 </form>
+                 <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
+                     <input type="hidden" name="action" value="profile">
+                     <button class="btn my-2 my-sm-0" type="submit" >My Profile</button>
+                 </form>
+                 <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
+                     <input type="hidden" name="action" value="logout">
+                     <button class="btn btn-danger my-2 my-sm-0" type="submit" >Logout</button>
+                 </form>
+             </div>
+         </nav> 
     </div>
 
     <div class="container">
