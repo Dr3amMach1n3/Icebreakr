@@ -64,29 +64,29 @@
                     <div class="row">
                         <div class="spacer">
                             Height: ${currentUser.heightFeet} ft. ${currentUser.heightInches} in.<br>Change selection below:<br>
-                            <input id="height_feet" type="number" min="0" max ="9" step="1" size="1"/> ft. <input id="height_inches" type="number" min="0" max ="11" step="1" size="1"/> in.
+                            <input id="height_feet" name="height_feet" type="number" min="0" max ="9" step="1" size="1"/> ft. <input id="height_inches" name="height_inches" type="number" min="0" max ="11" step="1" size="1"/> in.
                         </div>
                     </div>
                     <div class="row">
                         <div class="spacer">
                             Hair: ${currentUser.hairColor_string}<br>Change selection below:<br>
-                            <select id="hair_color">
-                                <option value="Brown">Brown</option>
-                                <option value="Bald">Bald</option>
-                                <option value="Blonde">Blonde</option>
-                                <option value="Dirty Blonde">Dirty Blonde</option>
-                                <option value="Black">Black</option>
-                                <option value="Auburn">Auburn</option>
-                                <option value="Ginger">Ginger</option>
-                                <option value="Gray">Gray</option>
-                                <option value="White">White</option>
-                                <option value="Silver">Silver</option>
-                                <option value="Red">Red</option>
-                                <option value="Orange">Orange</option>
-                                <option value="Yellow">Yellow</option>
-                                <option value="Green">Green</option>
-                                <option value="Blue">Blue</option>
-                                <option value="Multi-Colored">Multi-Colored</option>
+                            <select id="hair_color" name="hair_color">
+                                <option value="0">Brown</option>
+                                <option value="1">Bald</option>
+                                <option value="2">Blonde</option>
+                                <option value="3">Dirty Blonde</option>
+                                <option value="4">Black</option>
+                                <option value="5">Auburn</option>
+                                <option value="6">Ginger</option>
+                                <option value="7">Gray</option>
+                                <option value="8">White</option>
+                                <option value="9">Silver</option>
+                                <option value="10">Red</option>
+                                <option value="11">Orange</option>
+                                <option value="12">Yellow</option>
+                                <option value="13">Green</option>
+                                <option value="14">Blue</option>
+                                <option value="15">Multi-Colored</option>
                             </select>
                         </div>
                     </div>
@@ -95,57 +95,57 @@
                     </div>
                     <div class="row">
                         <div class="spacer">Children: ${currentUser.children}<br>Change selection below:<br>
-                            <input id="num_children" type="number" min="0" max ="70" step="1" size="1"/>
+                            <input id="num_children" name="children" type="number" min="0" max ="70" step="1" size="1"/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="spacer">Ethnicity: ${currentUser.ethnicity}<br>Change selection below:<br>
-                            <input id="ethnicity" type="text" value="${currentUser.ethnicity}"/>
+                            <input id="ethnicity" name="ethnicity" type="text"/>
                         </div>
                     </div>
                     <div class="row">
                         <div class="spacer">Glasses: ${currentUser.glasses_string}<br>Change selection below:<br>
-                            <select id="glasses">
-                                    <option name="glasses" value="yes">Yes</option>
-                                    <option name="glasses" value="no">No</option>
+                            <select id="wears_glasses" name="glasses">
+                                    <option value="0">Yes</option>
+                                    <option value="1">No</option>
                         </select></div>
                     </div>
                 </div>
                 <div class="col">
                     <div class="row">
                         <div class="spacer">Interested in<br>${currentUser.lookingfor_string}<br>Change selection below:<br>
-                            <input type="checkbox" name="g1" value="1">Male</input>
-                            <input type="checkbox" name="g2" value="1">Female</input>
-                            <input type="checkbox" name="g3" value="1">Transgender</input>
-                            <input type="checkbox" name="g4" value="1">Transsexual</input>
-                            <input type="checkbox" name="g5" value="1">Non-Binary</input>
+                            <input type="checkbox" name="g0" value="1">Male</input>
+                            <input type="checkbox" name="g1" value="1">Female</input>
+                            <input type="checkbox" name="g2" value="1">Transgender</input>
+                            <input type="checkbox" name="g3" value="1">Transsexual</input>
+                            <input type="checkbox" name="g4" value="1">Non-Binary</input>
                         </div>
                     </div>
                     <div class="row">
                         <div class="spacer">Hobbies<br>${currentUser.hobbies_string}<br>Change selection below:<br>
-                            <input type="checkbox" name="h1" value="1">Yoga</input>
-                            <input type="checkbox" name="h2" value="1">Music</input>
-                            <input type="checkbox" name="h3" value="1">Singing</input>
-                            <input type="checkbox" name="h4" value="1">Dancing</input><br>
-                            <input type="checkbox" name="h5" value="1">Art</input>
-                            <input type="checkbox" name="h6" value="1">Hiking</input>
-                            <input type="checkbox" name="h7" value="1">Biking</input>
-                            <input type="checkbox" name="h8" value="1">Swimming</input><br>
-                            <input type="checkbox" name="h9" value="1">Cooking</input>
-                            <input type="checkbox" name="h10" value="1">Gardening</input>
-                            <input type="checkbox" name="h11" value="1">Driving</input>
-                            <input type="checkbox" name="h12" value="1">Comedy</input><br>
-                            <input type="checkbox" name="h13" value="1">Fighting</input>
-                            <input type="checkbox" name="h14" value="1">Philosophy</input>
-                            <input type="checkbox" name="h15" value="1">Business</input>
-                            <input type="checkbox" name="h16" value="1">Investing</input>
+                            <input type="checkbox" name="h0" value="1">Yoga</input>
+                            <input type="checkbox" name="h1" value="1">Music</input>
+                            <input type="checkbox" name="h2" value="1">Singing</input>
+                            <input type="checkbox" name="h3" value="1">Dancing</input><br>
+                            <input type="checkbox" name="h4" value="1">Art</input>
+                            <input type="checkbox" name="h5" value="1">Hiking</input>
+                            <input type="checkbox" name="h6" value="1">Biking</input>
+                            <input type="checkbox" name="h7" value="1">Swimming</input><br>
+                            <input type="checkbox" name="h8" value="1">Cooking</input>
+                            <input type="checkbox" name="h9" value="1">Gardening</input>
+                            <input type="checkbox" name="h10" value="1">Driving</input>
+                            <input type="checkbox" name="h11" value="1">Comedy</input><br>
+                            <input type="checkbox" name="h12" value="1">Fighting</input>
+                            <input type="checkbox" name="h13" value="1">Philosophy</input>
+                            <input type="checkbox" name="h14" value="1">Business</input>
+                            <input type="checkbox" name="h15" value="1">Investing</input>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="spacer">Conversation Starters<br>
-                <textarea id="starters" class="form-control" rows="8" value="starters">${currentUser.starters}</textarea>
+                <textarea name="starters" class="form-control" rows="8">${currentUser.starters}</textarea>
                 </div>
             </div>
             <div class="row">
