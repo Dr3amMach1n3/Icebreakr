@@ -274,6 +274,8 @@ public class IcebreakrServlet extends HttpServlet {
                     case 9:
                         pictures.setPicture9(url);
                 }
+                ps.close();
+                results.close();
             }
             pictures.updatePictureCount();
         } catch (SQLException ex) {
