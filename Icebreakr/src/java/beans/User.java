@@ -307,7 +307,7 @@ public class User implements Serializable{
             age = age - 1;
         }
         
-        return age;
+        return 6;
     }
     
     /** Generates a yes/no response to the question "Does this user wear glasses"
