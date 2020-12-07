@@ -430,7 +430,7 @@ public class IcebreakrServlet extends HttpServlet {
             }else if(action.equals("update_profile")){
                 /* get the updated info */
                 String username = currentUser.getUsername();
-                String gender = currentUser.getGender_string();
+                //String gender = currentUser.getGender_string();
                 String lookingfor = getBitString(request, numGenders, genderPrefix);
                 String location = currentUser.getLocation();
                 String hobbies = getBitString(request, numHobbies, hobbyPrefix);
@@ -465,19 +465,19 @@ public class IcebreakrServlet extends HttpServlet {
                 String glasses = request.getParameter("glasses");
                 
                 /* attempt to insert the new data into the database */
-                PreparedStatement statement = dbConnection.prepareStatement("UPDATE 'User' SET 'gender'=?, 'lookingfor'=?, 'location'=?, 'hobbies'=?, 'starters'=?, 'height'=?, 'haircolor'=?, 'children'=?, 'weight'=?, 'ethnicity'=?, 'glasses'=? WHERE 'User'.'username'=?");
-                statement.setString(1, gender);
-                statement.setString(2, lookingfor);
-                statement.setString(3, location);
-                statement.setString(4, hobbies);
-                statement.setString(5, starters);
-                statement.setString(6, height);
-                statement.setString(7, haircolor);
-                statement.setString(8, children);
-                statement.setString(9, weight);
-                statement.setString(10, ethnicity);
-                statement.setString(11, glasses);
-                statement.setString(12, username);
+                PreparedStatement statement = dbConnection.prepareStatement("UPDATE User SET lookingfor=?, location=?, hobbies=?, starters=?, height=?, haircolor=?, children=?, weight=?, ethnicity=?, glasses=? WHERE User.username=?");
+                //statement.setString(1, gender);
+                statement.setString(1, lookingfor);
+                statement.setString(2, location);
+                statement.setString(3, hobbies);
+                statement.setString(4, starters);
+                statement.setString(5, height);
+                statement.setString(6, haircolor);
+                statement.setString(7, children);
+                statement.setString(8, weight);
+                statement.setString(9, ethnicity);
+                statement.setString(10, glasses);
+                statement.setString(11, username);
                 
                 statement.executeUpdate();
                 
