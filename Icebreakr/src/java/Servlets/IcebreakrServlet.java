@@ -456,29 +456,25 @@ public class IcebreakrServlet extends HttpServlet {
                 String glasses = request.getParameter("glasses");
                 
                 /* attempt to insert the new data into the database */
-                try (PreparedStatement statement = dbConnection.prepareStatement("INSERT INTO User (gender, lookingfor, location, hobbies, starters, height, haircolor, children, weight, ethnicity, glasses) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)")) {
-                    statement.setString(1, gender);
-                    statement.setString(2, lookingfor);
-                    statement.setString(3, location);
-                    statement.setString(4, hobbies);
-                    statement.setString(5, starters);
-                    statement.setString(6, height);
-                    statement.setString(7, haircolor);
-                    statement.setString(8, children);
-                    statement.setString(9, weight);
-                    statement.setString(10, ethnicity);
-                    statement.setString(11, glasses);
-                    
-                    statement.executeUpdate();
-                    
-                    loadUser(currentUser, username, dbConnection); //load the updated profile
-                    url = "profile.jsp";
-                    
-                    statement.close();
-                } catch (Exception e) {
-                    response.setHeader("ERROR: ", e.toString());
-                    url = "index.jsp"; //return to login page
-                }
+                PreparedStatement statement = dbConnection.prepareStatement("INSERT INTO User (gender, lookingfor, location, hobbies, starters, height, haircolor, children, weight, ethnicity, glasses) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");
+                statement.setString(1, gender);
+                statement.setString(2, lookingfor);
+                statement.setString(3, location);
+                statement.setString(4, hobbies);
+                statement.setString(5, starters);
+                statement.setString(6, height);
+                statement.setString(7, haircolor);
+                statement.setString(8, children);
+                statement.setString(9, weight);
+                statement.setString(10, ethnicity);
+                statement.setString(11, glasses);
+                
+                statement.executeUpdate();
+                
+                loadUser(currentUser, username, dbConnection); //load the updated profile
+                url = "profile.jsp";
+                
+                statement.close();
             }else if(action.equals("logout")){
                 session.setAttribute("credErr", null);
                 session.setAttribute("currentUser", null);
