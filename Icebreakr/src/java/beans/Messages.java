@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class Messages implements Serializable{
     
-    private String target;
+    private User target;
     private ArrayList<String> sender;
     private ArrayList<String> receiver;
     private ArrayList<String> content;
@@ -25,11 +25,11 @@ public class Messages implements Serializable{
         content = new ArrayList<String>();
     }
     
-    public void setTarget(String s) {
+    public void setTarget(User s) {
         target = s;
     }
     
-    public String getTarget() {
+    public User getTarget() {
         return target;
     }
     
