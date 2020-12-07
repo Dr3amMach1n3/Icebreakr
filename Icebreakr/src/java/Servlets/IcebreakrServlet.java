@@ -46,9 +46,14 @@ public class IcebreakrServlet extends HttpServlet {
         return Integer.toString(returnMe);
     }
     
+    /** Attempt to populate the specified user with information from the database
+     * 
+     * @param user the user to add info to
+     * @param username the user's username
+     * @param connection the current database connection
+     */
     private void loadUser(User user, String username, Connection connection){
         try{
-            Statement statement = connection.createStatement();
             String preparedSQL = "SELECT * FROM User WHERE username = ?";
             PreparedStatement ps = connection.prepareStatement(preparedSQL);
             ps.setString(1, username);
@@ -63,22 +68,22 @@ public class IcebreakrServlet extends HttpServlet {
             int gender = results.getInt(5);
             switch(gender) {
                 case 0:
-                    user.setGender("Male");
+                    user.setGender(Genders.Male);
                     break;
                 case 1:
-                    user.setGender("Female");
+                    user.setGender(Genders.Female);
                     break;
                 case 2:
-                    user.setGender("Transgender");
+                    user.setGender(Genders.Transgender);
                     break;
                 case 3:
-                    user.setGender("Transsexual");
+                    user.setGender(Genders.Transsexual);
                     break;
                 default:
-                    user.setGender("Non_Binary");
+                    user.setGender(Genders.Non_Binary);
             }
             int lookingfor = results.getInt(6);
-            ArrayList<Genders> l_lookingfor = new ArrayList<Genders>();
+            ArrayList<Genders> l_lookingfor = new ArrayList<>();
             for(int i = 0; i < 5; i++) {
                 int bit = lookingfor & 1;
                 if(bit > 0) {
@@ -105,7 +110,7 @@ public class IcebreakrServlet extends HttpServlet {
             user.setLookingfor(l_lookingfor);
             user.setLocation(results.getNString(7));
             int hobbies = results.getInt(8);
-            ArrayList<Hobbies> l_hobbies = new ArrayList<Hobbies>();
+            ArrayList<Hobbies> l_hobbies = new ArrayList<>();
             for(int i = 0; i < 16; i++) {
                 int bit = hobbies & 1;
                 if(bit > 0) {
@@ -410,6 +415,46 @@ public class IcebreakrServlet extends HttpServlet {
                 }
                 statement.close();
                 result.close();
+            /* code for when a user updates their profile */
+            }else if(action.equals("update_profile")){
+                /* get the updated info */
+                String username = request.getParameter("username");
+                String gender = request.getParameter("gender");
+                String lookingfor = getBitString(request, numGenders, genderPrefix);
+                String location = request.getParameter("location");
+                String hobbies = getBitString(request, numHobbies, hobbyPrefix);
+                String starters = request.getParameter("starters");
+                String height = Integer.toString((12 * Integer.parseInt(request.getParameter("height_feet"))) + Integer.parseInt(request.getParameter("height_inches")));
+                String haircolor = request.getParameter("hair_color");
+                String children = request.getParameter("children");
+                String weight = request.getParameter("weight");
+                String ethnicity = request.getParameter("ethnicity");
+                String glasses = request.getParameter("glasses");
+                
+                /* attempt to insert the new data into the database */
+                try (PreparedStatement statement = dbConnection.prepareStatement("INSERT INTO User (gender, lookingfor, location, hobbies, starters, height, haircolor, children, weight, ethnicity, glasses) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)")) {
+                    statement.setString(1, gender);
+                    statement.setString(2, lookingfor);
+                    statement.setString(3, location);
+                    statement.setString(4, hobbies);
+                    statement.setString(5, starters);
+                    statement.setString(6, height);
+                    statement.setString(7, haircolor);
+                    statement.setString(8, children);
+                    statement.setString(9, weight);
+                    statement.setString(10, ethnicity);
+                    statement.setString(11, glasses);
+                    
+                    statement.executeUpdate();
+                    
+                    loadUser(currentUser, username, dbConnection); //load the updated profile
+                    url = "profile.jsp";
+                    
+                    statement.close();
+                } catch (Exception e) {
+                    response.setHeader("ERROR: ", e.toString());
+                    url = "index.jsp"; //return to login page
+                }
             }else if(action.equals("logout")){
                 session.setAttribute("credErr", null);
                 session.setAttribute("currentUser", null);
@@ -438,7 +483,7 @@ public class IcebreakrServlet extends HttpServlet {
                 if(nextUser != null){
                     loadUser(otherUser, nextUser, dbConnection);
                 }else{
-                    otherUser.setUsername(null);
+                    otherUser.clear();
                 }
                 url = "match.jsp";
             }else if(action.equals("swipe")){
@@ -463,7 +508,7 @@ public class IcebreakrServlet extends HttpServlet {
                 if(nextUser != null){
                     loadUser(otherUser, nextUser, dbConnection);
                 }else{
-                    otherUser.setUsername(null);
+                    otherUser.clear();
                 }
                 url = "match.jsp";
             }else if(action.equals("conversation")){
