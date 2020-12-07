@@ -49,40 +49,52 @@ public class User implements Serializable{
     private String password;
     private String name;
     private Date birthday;
+    private String age_string;
     private Genders gender;
+    private String gender_string;
     private ArrayList<Genders> lookingfor;
+    private String lookingfor_string;
     private String location;
     private ArrayList<Hobbies> hobbies;
+    private String hobbies_string;
     private String starters;
     private int heightFeet;
     private int heightInches;
     private HairColors hairColor;
+    private String hairColor_string;
     private String zodiac;
     private int children;
     private int weight;
     private String eyeColor;
     private String ethnicity;
     private boolean glasses;
+    private String glasses_string;
 
     public void clear(){
         username = null;
         password = null;
         name = null;
         birthday = null;
+        age_string = null;
         gender = null;
+        gender_string = null;
         lookingfor = null;
+        lookingfor_string = null;
         location = null;
         hobbies = null;
+        hobbies_string = null;
         starters = null;
         heightFeet = 0;
         heightInches = 0;
         hairColor = null;
+        hairColor_string = null;
         zodiac = null;
         children = 0;
         weight = 0;
         eyeColor = null;
         ethnicity = null;
-        glasses = false; 
+        glasses = false;
+        glasses_string = null;
     }
     
     public void setUsername(String username) {
@@ -100,13 +112,25 @@ public class User implements Serializable{
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
+    
+    public void setAge_string() {
+        this.age_string = Integer.toString(generateAge());
+    }
 
     public void setGender(Genders gender) {
         this.gender = gender;
     }
     
+    public void setGender_string() {
+        this.gender_string = this.gender.toString();
+    }
+    
     public void setLookingfor(ArrayList<Genders> lookingfor) {
         this.lookingfor = lookingfor;
+    }
+    
+    public void setLookingfor_string() {
+        this.lookingfor_string = generateLookingFor();
     }
 
     public void setLocation(String location) {
@@ -115,6 +139,10 @@ public class User implements Serializable{
 
     public void setHobbies(ArrayList<Hobbies> hobbies) {
         this.hobbies = hobbies;
+    }
+    
+    public void setHobbies_string() {
+        this.hobbies_string = generateHobbies();
     }
     
     public void setStarters(String starters) {
@@ -132,9 +160,13 @@ public class User implements Serializable{
     public void setHairColor(HairColors hairColor) {
         this.hairColor = hairColor;
     }
+    
+    public void setHairColor_string() {
+        this.hairColor_string = this.hairColor.toString();
+    }
 
-    public void setZodiac(String zodiac) {
-        this.zodiac = zodiac;
+    public void setZodiac() {
+        this.zodiac = generateZodiac();
     }
 
     public void setChildren(int children) {
@@ -157,6 +189,10 @@ public class User implements Serializable{
         this.glasses = glasses;
     }
     
+    public void setGlasses_string() {
+        this.glasses_string = wearsGlasses();
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -172,13 +208,25 @@ public class User implements Serializable{
     public Date getBirthday() {
         return birthday;
     }
+    
+    public String getAge_string() {
+        return age_string;
+    }
 
     public Genders getGender() {
         return gender;
     }
     
+    public String getGender_string() {
+        return gender_string;
+    }
+    
     public ArrayList<Genders> getLookingfor() {
         return lookingfor;
+    }
+    
+    public String getLookingfor_string() {
+        return lookingfor_string;
     }
 
     public String getLocation() {
@@ -187,6 +235,10 @@ public class User implements Serializable{
 
     public ArrayList<Hobbies> getHobbies() {
         return hobbies;
+    }
+    
+    public String getHobbies_string() {
+        return hobbies_string;
     }
 
     public String getStarters() {
@@ -203,6 +255,10 @@ public class User implements Serializable{
 
     public HairColors getHairColor() {
         return hairColor;
+    }
+    
+    public String getHairColor_string() {
+        return hairColor_string;
     }
 
     public String getZodiac() {
@@ -227,6 +283,10 @@ public class User implements Serializable{
 
     public boolean isGlasses() {
         return glasses;
+    }
+    
+    public String getGlasses_string() {
+        return glasses_string;
     }
     
     /** Use the birthday to return the current age
