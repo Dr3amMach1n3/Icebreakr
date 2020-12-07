@@ -567,6 +567,7 @@ public class IcebreakrServlet extends HttpServlet {
                 resultB.close();
             }else if(action.equals("messages")){
                 String other = request.getParameter("target");
+                loadUser(otherUser,other,dbConnection);
                 
                 Statement statement = dbConnection.createStatement();
                 ResultSet result = statement.executeQuery("SELECT * FROM Message WHERE (sender='" + currentUser.getUsername()
@@ -574,7 +575,7 @@ public class IcebreakrServlet extends HttpServlet {
                 
                 Messages messages = new Messages();
                 
-                messages.setTarget(other);
+                messages.setTarget(otherUser);
                 while(result.next()) {
                     messages.addSender(result.getString("sender"));
                     messages.addReceiver(result.getString("receiver"));
