@@ -524,8 +524,6 @@ public class IcebreakrServlet extends HttpServlet {
                 while(resultB.next()) {
                     conversations.addUsers(resultB.getString("userB"));
                 }
-                conversations.addUsers((ArrayList<String>) resultA);
-                conversations.addUsers((ArrayList<String>) resultB);
                 conversations.sort();
                
                 session.setAttribute("conversations", conversations);
