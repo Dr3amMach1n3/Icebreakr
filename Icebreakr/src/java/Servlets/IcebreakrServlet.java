@@ -430,9 +430,9 @@ public class IcebreakrServlet extends HttpServlet {
             }else if(action.equals("update_profile")){
                 /* get the updated info */
                 String username = currentUser.getUsername();
-                String gender = request.getParameter("gender");
+                //String gender = request.getParameter("gender");
                 String lookingfor = getBitString(request, numGenders, genderPrefix);
-                String location = request.getParameter("location");
+                //String location = request.getParameter("location");
                 String hobbies = getBitString(request, numHobbies, hobbyPrefix);
                 String starters = request.getParameter("starters");
                 String height = "0";
@@ -451,8 +451,17 @@ public class IcebreakrServlet extends HttpServlet {
                 }
                 String haircolor = request.getParameter("hair_color");
                 String children = request.getParameter("children");
+                if(children == null) {
+                    children = "0";
+                }
                 String weight = request.getParameter("weight");
+                if(weight == null) {
+                    weight = "0";
+                }
                 String ethnicity = request.getParameter("ethnicity");
+                if(ethnicity == null) {
+                    ethnicity = "";
+                }
                 String glasses = request.getParameter("glasses");
                 
                 /* attempt to insert the new data into the database */
