@@ -561,7 +561,7 @@ public class IcebreakrServlet extends HttpServlet {
                 Statement statement = dbConnection.createStatement();
                 ResultSet result = statement.executeQuery("SELECT * FROM Message WHERE (sender='" + currentUser.getUsername() + "' AND receiver='" + other
                         + "') OR (receiver='" + currentUser.getUsername()
-                        + "' AND sender='" + other + "') ORDER BY time DESC");
+                        + "' AND sender='" + other + "') ORDER BY time ASC");
                 
                 Messages messages = new Messages();
                 
