@@ -145,7 +145,7 @@
             </div>
             <div class="row">
                 <div class="spacer">Conversation Starters<br>
-                <textarea id="conversation_starters" class="form-control" rows="8" value="starters">${currentUser.starters}</textarea>
+                <textarea id="starters" class="form-control" rows="8" value="starters">${currentUser.starters}</textarea>
                 </div>
             </div>
             <div class="row">
