@@ -15,29 +15,29 @@ import java.util.Collections;
  */
 public class Conversations implements Serializable{
     
-    private ArrayList<String> users;
+    private ArrayList<User> users;
     
     public Conversations() {
-        users = new ArrayList<String>();
+        users = new ArrayList<User>();
     }
     
-    public void addUsers(String u) {
+    public void addUsers(User u) {
         users.add(u);
     }
     
-    public void addUsers(ArrayList<String> u) {
+    public void addUsers(ArrayList<User> u) {
         users.addAll(u);
     }
     
-    public void sort() {
+/*    public void sort() {
         Collections.sort(users);
-    }
+    }*/
     
-    public ArrayList<String> getUsers() {
+    public ArrayList<User> getUsers() {
         return users;
     }
 
-    public String getUser(int i) {
+    public User getUser(int i) {
         return users.get(i);
     }
 }
