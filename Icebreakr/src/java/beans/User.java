@@ -301,13 +301,13 @@ public class User implements Serializable{
         Calendar bday = Calendar.getInstance();
         bday.setTimeInMillis(time);
         
-        int age = now.YEAR - bday.YEAR;
+        int age = now.get(Calendar.YEAR) - bday.get(Calendar.YEAR);
         /* account for when user hasn't had birthday yet */
-        if(now.DAY_OF_YEAR < bday.DAY_OF_YEAR) {
+        if(now.get(Calendar.DAY_OF_YEAR) < bday.get(Calendar.DAY_OF_YEAR)) {
             age = age - 1;
         }
         
-        return 6;
+        return age;
     }
     
     /** Generates a yes/no response to the question "Does this user wear glasses"
@@ -333,8 +333,8 @@ public class User implements Serializable{
         Calendar bday = Calendar.getInstance();
         bday.setTimeInMillis(time);
         
-        int month = bday.MONTH;
-        int day = bday.DAY_OF_MONTH;
+        int month = bday.get(Calendar.MONTH);
+        int day = bday.get(Calendar.DAY_OF_MONTH);
         
         switch(month) {
             case 1:
