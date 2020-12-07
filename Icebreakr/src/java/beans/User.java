@@ -113,24 +113,24 @@ public class User implements Serializable{
         this.birthday = birthday;
     }
     
-    public void setAge_string() {
-        this.age_string = Integer.toString(generateAge());
+    public void setAge_string(String age) {
+        this.age_string = age;
     }
 
     public void setGender(Genders gender) {
         this.gender = gender;
     }
     
-    public void setGender_string() {
-        this.gender_string = this.gender.toString();
+    public void setGender_string(String gender) {
+        this.gender_string = gender;
     }
     
     public void setLookingfor(ArrayList<Genders> lookingfor) {
         this.lookingfor = lookingfor;
     }
     
-    public void setLookingfor_string() {
-        this.lookingfor_string = generateLookingFor();
+    public void setLookingfor_string(String lookingfor) {
+        this.lookingfor_string = lookingfor;
     }
 
     public void setLocation(String location) {
@@ -141,8 +141,8 @@ public class User implements Serializable{
         this.hobbies = hobbies;
     }
     
-    public void setHobbies_string() {
-        this.hobbies_string = generateHobbies();
+    public void setHobbies_string(String hobbies) {
+        this.hobbies_string = hobbies;
     }
     
     public void setStarters(String starters) {
@@ -161,12 +161,12 @@ public class User implements Serializable{
         this.hairColor = hairColor;
     }
     
-    public void setHairColor_string() {
-        this.hairColor_string = this.hairColor.toString();
+    public void setHairColor_string(String hairColor) {
+        this.hairColor_string = hairColor;
     }
 
-    public void setZodiac() {
-        this.zodiac = generateZodiac();
+    public void setZodiac(String zodiac) {
+        this.zodiac = zodiac;
     }
 
     public void setChildren(int children) {
@@ -189,8 +189,8 @@ public class User implements Serializable{
         this.glasses = glasses;
     }
     
-    public void setGlasses_string() {
-        this.glasses_string = wearsGlasses();
+    public void setGlasses_string(String glasses) {
+        this.glasses_string = glasses;
     }
     
     public String getUsername() {
@@ -295,7 +295,7 @@ public class User implements Serializable{
      */
     public int generateAge() {
         /* java.Date is deprecated, so convert to java.Calendar */
-        long time = birthday.getTime();
+        long time = this.birthday.getTime();
         
         Calendar now = Calendar.getInstance();
         Calendar bday = Calendar.getInstance();
@@ -328,7 +328,7 @@ public class User implements Serializable{
      */
     public String generateZodiac() {
         /* java.Date is deprecated, so convert to java.Calendar */
-        long time = birthday.getTime();
+        long time = this.birthday.getTime();
         
         Calendar bday = Calendar.getInstance();
         bday.setTimeInMillis(time);
