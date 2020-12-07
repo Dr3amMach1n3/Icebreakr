@@ -94,7 +94,7 @@
     		<div class="col-sm-4"></div>
     		<div class="col-sm-4 text-center">
                         <form action="IcebreakrServlet" method="post">
-                            <input type="hidden" name="action" value="preview">
+                            <input type="hidden" name="action" value="preview_user">
                             <input type="submit" value="Preview Member!">
                         </form>
     		</div>
