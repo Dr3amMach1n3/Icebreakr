@@ -25,8 +25,12 @@ public class Messages implements Serializable{
         content = new ArrayList<String>();
     }
     
-    public void addTarget(String s) {
+    public void setTarget(String s) {
         target = s;
+    }
+    
+    public String getTarget() {
+        return target;
     }
     
     public void addSender(String s) {
