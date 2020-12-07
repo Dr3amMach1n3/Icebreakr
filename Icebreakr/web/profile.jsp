@@ -34,7 +34,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <div class="spacer_pict"><img src="El_Guapo.jpg"></div>
+                <div class="spacer_pict"><img src="${currentPictures.picture1}"></div>
             </div>
             <div class="col">
                 <div class="row">
@@ -55,7 +55,7 @@
                 </div>                
             </div>
         </div>
-        <div>Pictures: <span id="picture_count">1</span></div>
+        <div>Pictures: <span id="picture_count">${currentPictures.pictureCount}</span></div>
         <form action="IcebreakrServlet" method="post">
             <input type="hidden" name="action" value="pictures">
             <button class="btn text-primary font-weight-bold my-2 my-sm-0" type="submit">Manage Pictures</button>
