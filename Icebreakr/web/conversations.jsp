@@ -42,7 +42,7 @@
             <a class="msgr btn btn-light text-center">
                 <form "msgr btn btn-light text-center" action="IcebreakrServlet" method="post">
                     <input type="hidden" name="action" value="messages">
-                    <input type="hidden" name="target" value="${user.getName()}">
+                    <input type="hidden" name="target" value="${user.getUsername()}">
                     <input type="submit" value="${user.getName()}">
                 </form>
             </a>
