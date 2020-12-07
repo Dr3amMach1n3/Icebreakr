@@ -451,15 +451,15 @@ public class IcebreakrServlet extends HttpServlet {
                 }
                 String haircolor = request.getParameter("hair_color");
                 String children = request.getParameter("children");
-                if(children == null) {
+                if(children == null || children.equals("")) {
                     children = "0";
                 }
                 String weight = request.getParameter("weight");
-                if(weight == null) {
+                if(weight == null || weight.equals("")) {
                     weight = "0";
                 }
                 String ethnicity = request.getParameter("ethnicity");
-                if(ethnicity == null) {
+                if(ethnicity == null || ethnicity.equals("")) {
                     ethnicity = "";
                 }
                 String glasses = request.getParameter("glasses");
@@ -567,7 +567,6 @@ public class IcebreakrServlet extends HttpServlet {
                 resultB.close();
             }else if(action.equals("messages")){
                 String other = request.getParameter("target");
-                loadUser(otherUser,other,dbConnection);
                 
                 Statement statement = dbConnection.createStatement();
                 ResultSet result = statement.executeQuery("SELECT * FROM Message WHERE (sender='" + currentUser.getUsername()
@@ -575,7 +574,7 @@ public class IcebreakrServlet extends HttpServlet {
                 
                 Messages messages = new Messages();
                 
-                messages.setTarget(otherUser);
+                messages.setTarget(other);
                 while(result.next()) {
                     messages.addSender(result.getString("sender"));
                     messages.addReceiver(result.getString("receiver"));
