@@ -580,14 +580,14 @@ public class IcebreakrServlet extends HttpServlet {
                 String username = result.getString("username");
                 loadPictures(otherPictures, username, dbConnection);
                 loadUser(otherUser, username, dbConnection);
-                url = "other_profile";
+                url = "other_profile.jsp";
                 result.close();
                 statement.close();
             }else if(action.equals("other_user")){
                 String username = request.getParameter("target");
                 loadUser(otherUser, username, dbConnection);
                 loadPictures(otherPictures, username, dbConnection);
-                url = "other_profile";
+                url = "other_profile.jsp";
             }else if(action.equals("match")){
                 String username = currentUser.getUsername();
 
