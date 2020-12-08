@@ -572,8 +572,10 @@ public class IcebreakrServlet extends HttpServlet {
                 session.setAttribute("swipeQueue", null);
                 url = "index.jsp";
             }else if(action.equals("preview_user")){
+
                 Statement statement = dbConnection.createStatement();
                 ResultSet result = statement.executeQuery("SELECT COUNT(username) FROM User");
+                result.next();
                 int numUsers = result.getInt(1);
                 Random rand =  new Random();
                 result = statement.executeQuery("SELECT username FROM User ORDER BY username LIMIT 1 OFFSET " + Integer.toString(rand.nextInt(numUsers)));
