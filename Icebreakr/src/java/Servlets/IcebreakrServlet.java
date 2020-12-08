@@ -583,7 +583,7 @@ public class IcebreakrServlet extends HttpServlet {
                 String username = result.getString("username");
                 loadPictures(otherPictures, username, dbConnection);
                 loadUser(otherUser, username, dbConnection);
-                url = "other_profile.jsp";
+                url = "preview_profile.jsp";
                 result.close();
                 statement.close();
             }else if(action.equals("other_user")){
@@ -675,6 +675,7 @@ public class IcebreakrServlet extends HttpServlet {
                     messages.addSender(result.getString("sender"));
                     messages.addReceiver(result.getString("receiver"));
                     messages.addContent(result.getString("content"));
+                    currentUser.addToScore(result.getString("content").lengt());
                 }
                 
                 session.setAttribute("messages", messages);
