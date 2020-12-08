@@ -242,55 +242,49 @@ public class IcebreakrServlet extends HttpServlet {
      * @param username the corresponding user of the photos
      * @param connection the current database connection
      */
-    private void loadPictures(Pictures pictures, String username, Connection connection){
-        try {
-            for(int i = 1; i < 10; i++) {
-                String preparedSQL = "SELECT * FROM Photo WHERE username = ? AND position = ?";
-                PreparedStatement ps = connection.prepareStatement(preparedSQL);
-                ps.setString(1, username);
-                ps.setString(2, Integer.toString(i));
-                ResultSet results = ps.executeQuery();
-            
-                //set all parameters in user to values in database
-                String url = results.getNString(2);
-                switch(i) {
-                    case 1:
-                        pictures.setPicture1("https://i.imgur.com/Zc2hyzj.jpeg");
-                        break;
-                    case 2:
-                        pictures.setPicture2(url);
-                        break;
-                    case 3:
-                        pictures.setPicture3(url);
-                        break;
-                    case 4:
-                        pictures.setPicture4(url);
-                        break;
-                    case 5:
-                        pictures.setPicture5(url);
-                        break;
-                    case 6:
-                        pictures.setPicture6(url);
-                        break;
-                    case 7:
-                        pictures.setPicture7(url);
-                        break;
-                    case 8:
-                        pictures.setPicture8(url);
-                        break;
-                    case 9:
-                        pictures.setPicture9(url);
-                        break;
-                }
-                ps.close();
-                results.close();
+    private void loadPictures(Pictures pictures, String username, Connection connection) {
+        for(int i = 1; i < 10; i++) {
+            String preparedSQL = "SELECT * FROM Photo WHERE username = ? AND position = ?";
+            PreparedStatement ps = connection.prepareStatement(preparedSQL);
+            ps.setString(1, username);
+            ps.setString(2, Integer.toString(i));
+            ResultSet results = ps.executeQuery();
+        
+            //set all parameters in user to values in database
+            String url = results.getNString(2);
+            switch(i) {
+                case 1:
+                    pictures.setPicture1("https://i.imgur.com/Zc2hyzj.jpeg");
+                    break;
+                case 2:
+                    pictures.setPicture2(url);
+                    break;
+                case 3:
+                    pictures.setPicture3(url);
+                    break;
+                case 4:
+                    pictures.setPicture4(url);
+                    break;
+                case 5:
+                    pictures.setPicture5(url);
+                    break;
+                case 6:
+                    pictures.setPicture6(url);
+                    break;
+                case 7:
+                    pictures.setPicture7(url);
+                    break;
+                case 8:
+                    pictures.setPicture8(url);
+                    break;
+                case 9:
+                    pictures.setPicture9(url);
+                    break;
             }
-            pictures.updatePictureCount();
-        } catch (SQLException ex) {
-            Logger.getLogger(IcebreakrServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (Exception ex) {
-            System.out.println("ERROR: " + ex);
+            ps.close();
+            results.close();
         }
+        pictures.updatePictureCount();
     }
 
     /**
