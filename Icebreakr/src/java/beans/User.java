@@ -69,6 +69,7 @@ public class User implements Serializable{
     private String ethnicity;
     private boolean glasses;
     private String glasses_string;
+    private int score;
 
     public void clear(){
         username = null;
@@ -95,6 +96,7 @@ public class User implements Serializable{
         ethnicity = null;
         glasses = false;
         glasses_string = null;
+        score = 0;
     }
     
     public void setUsername(String username) {
@@ -193,6 +195,10 @@ public class User implements Serializable{
         this.glasses_string = glasses;
     }
     
+    public void setScore(int score) {
+        this.score = score;
+    }
+    
     public String getUsername() {
         return username;
     }
@@ -287,6 +293,10 @@ public class User implements Serializable{
     
     public String getGlasses_string() {
         return glasses_string;
+    }
+    
+    public int getScore() {
+        return score;
     }
     
     /** Use the birthday to return the current age
@@ -440,5 +450,9 @@ public class User implements Serializable{
         }
         return_string = return_string.substring(0, return_string.length() - 2); //remove last ", "
         return return_string;
+    }
+    
+    public void addToScore(int i) {
+        this.setScore(this.getScore() + i);
     }
 }
