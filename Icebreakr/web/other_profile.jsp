@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,12 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <div class="spacer_picture"><img src="${otherPictures.picture1}"></div>
+                <c:if test="${currentUser.score gt 25}">
+                    <div class="spacer_picture"><img src="${otherPictures.picture1}"></div>
+                </c:if>
+                <c:if test="${currentUser.score le 25}">
+                    <div class="spacer_picture"><img src="test.jpg"></div>
+                </c:if>
             </div>
             <div class="col">
                 <div class="row">
@@ -58,22 +64,52 @@
         <div class="row">
             <div class="col">
                 <div class="row">
-                    <div class="spacer">Height: ${otherUser.heightFeet} ft. ${otherUser.heightInches} in.</div>
+                    <c:if test="${currentUser.score gt 25}">
+                        <div class="spacer">Height: ${otherUser.heightFeet} ft. ${otherUser.heightInches} in.</div>
+                    </c:if>
+                    <c:if test="${currentUser.score le 25}">
+                        <div class="spacer">Height: ? ft. ? in.</div>
+                    </c:if>
                 </div>
                 <div class="row">
-                    <div class="spacer">Hair: ${otherUser.hairColor_string}"</div>
+                    <c:if test="${currentUser.score gt 25}">
+                        <div class="spacer">Hair: ${otherUser.hairColor_string}"</div>
+                    </c:if>
+                    <c:if test="${currentUser.score le 25}">
+                        <div class="spacer">Hair: ?"</div>
+                    </c:if>
                 </div>
                 <div class="row">
-                    <div class="spacer">Zodiac Sign: ${otherUser.zodiac}</div>
+                    <c:if test="${currentUser.score gt 25}">
+                        <div class="spacer">Zodiac Sign: ${otherUser.zodiac}</div>
+                    </c:if>
+                    <c:if test="${currentUser.score le 25}">
+                        <div class="spacer">Zodiac Sign: ?</div>
+                    </c:if>
                 </div>
                 <div class="row">
-                    <div class="spacer">Children: ${otherUser.children}</div>
+                    <c:if test="${currentUser.score gt 25}">
+                        <div class="spacer">Children: ${otherUser.children}</div>
+                    </c:if>
+                    <c:if test="${currentUser.score le 25}">
+                        <div class="spacer">Children: ?</div>
+                    </c:if>
                 </div>
                 <div class="row">
-                    <div class="spacer">Ethnicity: ${otherUser.ethnicity}</div>
+                    <c:if test="${currentUser.score gt 25}">
+                        <div class="spacer">Ethnicity: ${otherUser.ethnicity}</div>
+                    </c:if>
+                    <c:if test="${currentUser.score le 25}">
+                        <div class="spacer">Ethnicity: ?</div>
+                    </c:if>
                 </div>
                 <div class="row">
-                    <div class="spacer">Glasses: ${otherUser.glasses_string}</div>
+                    <c:if test="${currentUser.score gt 25}">
+                        <div class="spacer">Glasses: ${otherUser.glasses_string}</div>
+                    </c:if>
+                    <c:if test="${currentUser.score le 25}">
+                        <div class="spacer">Glasses: ?</div>
+                    </c:if>
                 </div>
             </div>
             <div class="col">
