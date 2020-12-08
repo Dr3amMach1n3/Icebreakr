@@ -1,0 +1,22 @@
+.d-flex {
+    background-color: #CFE2F3;
+}
+
+.my-0 {
+    color: #674EA7;
+    font-weight: bolder;
+}
+
+.container {
+    background-color: #B82E8A;
+}
+
+.spacer {
+    margin: 6px;
+    width: 100%;
+    background-color: #EEE;
+}
+
+.spacer_large {
+    margin: 20px;
+}
