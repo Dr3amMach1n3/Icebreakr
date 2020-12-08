@@ -675,7 +675,7 @@ public class IcebreakrServlet extends HttpServlet {
                     messages.addSender(result.getString("sender"));
                     messages.addReceiver(result.getString("receiver"));
                     messages.addContent(result.getString("content"));
-                    currentUser.addToScore(result.getString("content").lengt());
+                    currentUser.addToScore(result.getString("content").length());
                 }
                 
                 session.setAttribute("messages", messages);
