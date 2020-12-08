@@ -12,6 +12,12 @@
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 border-bottom box-shadow">
         <h5 class="my-0 mr-md-auto">Icebreakr</h5>
         <nav class="my-2 my-md-0 mr-md-3">
+             <div class="btn-group">
+                 <form class="form-inline my-2 my-lg-0" action="IcebreakrServlet" method="post">
+                     <input type="hidden" name="action" value="logout">
+                     <button class="btn btn-danger my-2 my-sm-0" type="submit" >Back To Login</button>
+                 </form>
+             </div>
          </nav> 
     </div>
     <div class="container">
