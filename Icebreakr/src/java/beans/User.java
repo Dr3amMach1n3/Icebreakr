@@ -96,6 +96,7 @@ public class User implements Serializable{
         ethnicity = null;
         glasses = false;
         glasses_string = null;
+        score = 0;
     }
     
     public void setUsername(String username) {
@@ -449,5 +450,9 @@ public class User implements Serializable{
         }
         return_string = return_string.substring(0, return_string.length() - 2); //remove last ", "
         return return_string;
+    }
+    
+    public void addToScore(int i) {
+        this.setScore(this.getScore() + i);
     }
 }
