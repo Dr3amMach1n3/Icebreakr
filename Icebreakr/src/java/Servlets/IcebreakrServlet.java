@@ -255,7 +255,7 @@ public class IcebreakrServlet extends HttpServlet {
                 String url = results.getNString(2);
                 switch(i) {
                     case 1:
-                        pictures.setPicture1(url);
+                        pictures.setPicture1("https://i.imgur.com/Zc2hyzj.jpeg");
                         break;
                     case 2:
                         pictures.setPicture2(url);
