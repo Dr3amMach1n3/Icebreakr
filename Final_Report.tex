@@ -162,6 +162,11 @@
         The two usernames are foreign keys that correspond to two different users that are messaging each other.\\
         
         \item[\textbf{System Architecture}:]
-        $\includegraphics[width=0.9\columnwidth]{"SystemArchitecture.jpg"}$\\
+        $\includegraphics[width=0.9\columnwidth]{"SystemArchitecture.png"}$\\
+        The User class stores all of a user's information (username, real name, gender, birthday, etc) as well as methods for getting and setting all of that data. It also contains some methods for generating special content, like Zodiac signs from the birthday.\\
+        The Pictures class stores the URLs of all the photos of a user, as well as ways to get and set them. It also keeps track of how many photos the user has uploaded, which it updates using a special method.\\
+        The Servlet file contains all of the logic for navigating between the pages as well as calls to the database for updating and receiving information. Depending on the action that it receives, it may load a new page, populate User and Pictures classes, update information in the database, pull information from the database, or more.\\
+        The Profile, Other Profile, and Preview Profile jsp files display information from a User and a Pictures that the Servlet creates. The Profile file specifically also sends information to the Servlet for updating any user information, which updates the database. The Other Profile file check the User's Icebreakr Score before displaying some of the information. If the score isn't high enough, the information will be hidden. Increasing the score is done from the Servlet while sending messages. Preview Profile will never display fields that can be hidden and therefore doesn't ever use a Pictures class at all. Profile is accessed from Index, Conversation, Match, Other Profile, Pictures, and Signup. Other Profile is only accessed from Conversation. Preview Profile is accessed only from Index.\\
+        The Pictures jsp file displays all photos that the logged-in user has (which are populated via the Servlet) and also sends updated URL information to the Servlet so that the Photo database can be updated. Pictures is only accessed from Profile.\\
     \end{enumerate}
 \end{document}
