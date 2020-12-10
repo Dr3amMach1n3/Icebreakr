@@ -684,7 +684,7 @@ public class IcebreakrServlet extends HttpServlet {
             }else if(action.equals("sendMessage")){
                 String text = request.getParameter("text");
                 if (!text.isEmpty()) {
-                    String target = request.getParameter("target");
+                    String target = request.getParameter("target1");
                 
                     Statement statement = dbConnection.createStatement();
 
