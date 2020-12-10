@@ -89,7 +89,7 @@
     				<form action="IcebreakrServlet" method="post">
                                     <input type=textarea name="text">
                                     <input type="hidden" name="action" value="sendMessage">
-                                    <input type="hidden" name="target" value="${messages.target}">
+                                    <input type="hidden" name="target" value="${messages.target.getUsername()}">
                                     <input type="submit" value="Update">
                                 </form>
     			</div>
