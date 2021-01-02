@@ -1,7 +1,7 @@
 # Introduction
 This project was initially a class project for our Web Programming class. We built a dating site called Icebreakr. It is built on the premise of prioritizing conversations between users.  
 # Availability  
-The website is currently hosted at weave.cs.nmt.edu/apollo9/Icebreakr. The website and its database will be wiped from this location the next time the Web Programming class is offered (likely Fall 2021). Should it become available again, the new domain will be posted in this document.  
+The website is currently hosted at weave.cs.nmt.edu/apollo9/Icebreakr/. The website and its database will be wiped from this location the next time the Web Programming class is offered (likely Fall 2021). Should it become available again, the new domain will be posted in this document.  
 # Contents  
 ### ProjectWebsite/  
 Source code for a small website with information about our project, including varous project reports and group member info  
